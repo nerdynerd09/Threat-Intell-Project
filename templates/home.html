@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VIAA Threat Intel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
+    
+    <style>
+        /* Center-align text */
+        .center-text {
+            text-align: center;
+        }
+        
+        /* Style for "Malicious" label */
+        .malicious {
+            font-weight: bold;
+            color: red;
+        }
+        
+        /* Style for "Non-malicious" label */
+        .non-malicious {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <label class="logo">VIAA Threat Intel</label>
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <form action="/" method="POST" class="search-bar">
+        <input type="text" placeholder="Search IP" name="q">
+        <button type="submit"><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+    </form>
+    
+    {% if result is defined %}
+    <div class="card center-text">
+        {% if result == "Malicious IP" %}
+            <p class="malicious">{{ result }}</p>
+        {% elif result == "Non-malicious IP" %}
+            <p class="non-malicious">{{ result }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>
