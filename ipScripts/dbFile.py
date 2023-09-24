@@ -13,6 +13,6 @@ def dbStore(resultList):
 
 def dbSearch(target):
     if mycol.find_one({"ip":target}) is None:
-        print("Non-malicious IP")
+        return "Non-malicious IP"
     else:
-        print("Malicious IP")
+        return "Malicious IP"
