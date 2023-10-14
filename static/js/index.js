@@ -1,3 +1,5 @@
+document.getElementsByClassName('tab').item(0).click();
+
 socket = io();
 socket.connect('http://127.0.0.1:5000/');
 
@@ -33,4 +35,40 @@ function checkentity() {
 
 
 
+}
+
+function uploadFile() {
+    var fileInput = document.getElementById("fileInput");
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    xhr.open("POST", "/success", true);
+    xhr.setRequestHeader("enctype", "multipart/form-data");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                document.getElementById("response").innerHTML = "File uploaded successfully.";
+            } else {
+                document.getElementById("response").innerHTML = "File upload failed.";
+            }
+        }
+    };
+
+    xhr.send(formData);
+
+}
+
+
+function showTab(tabIndex) {
+    var tabContents = document.querySelectorAll('.tab-content');
+    var tabs = document.querySelectorAll('.tab');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+        tabs[i].style.backgroundColor = '#ccc';
+    }
+
+    tabContents[tabIndex - 1].style.display = 'flex';
+    tabs[tabIndex - 1].style.backgroundColor = '#fff';
+    // tabContents[tabIndex - 1].style.backgroundColor = "white"
 }
