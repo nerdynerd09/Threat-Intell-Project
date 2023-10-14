@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>VIAA Threat Intel</title>
@@ -7,26 +8,11 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
-    
-    <style>
-        /* Center-align text */
-        .center-text {
-            text-align: center;
-        }
-        
-        /* Style for "Malicious" label */
-        .malicious {
-            font-weight: bold;
-            color: red;
-        }
-        
-        /* Style for "Non-malicious" label */
-        .non-malicious {
-            font-weight: bold;
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="../static/js/index.js"></script>
 </head>
+
 <body>
     <nav>
         <label class="logo">VIAA Threat Intel</label>
@@ -38,19 +24,26 @@
         </ul>
     </nav>
 
-    <form action="/" method="POST" class="search-bar">
-        <input type="text" placeholder="Search IP" name="q">
-        <button type="submit"><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
-    </form>
-    
-    {% if result is defined %}
+    <div class="search-bar">
+        <!-- <form action="/" method="POST" class="search-bar"> -->
+        <input type="text" placeholder="Search IP" name="q" id="search-box">
+        <button type="submit" onclick="checkentity()"><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+        <!-- </form> -->
+    </div>
+    <!-- {% if result is defined %}
     <div class="card center-text">
         {% if result == "Malicious IP" %}
-            <p class="malicious">{{ result }}</p>
+        <p class="malicious">{{ result }}</p>
         {% elif result == "Non-malicious IP" %}
-            <p class="non-malicious">{{ result }}</p>
+        <p class="non-malicious">{{ result }}</p>
         {% endif %}
     </div>
-    {% endif %}
+    {% endif %} -->
+
+    <div class="card center-text">
+        <p id="result-text"></p>
+    </div>
+
 </body>
+
 </html>

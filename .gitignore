@@ -1,1 +1,6 @@
 ipScripts/__pycache__/
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+__pycache__/

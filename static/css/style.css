@@ -1,72 +1,80 @@
-*{
+* {
     padding: 0;
     margin: 0;
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
 }
-body{
-    font-family: 'Montserrat', sans-serif;;
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    ;
 }
-nav{
+
+nav {
     background: #2003a0;
     height: 80px;
     width: 100%;
     box-shadow: 0 0 10px 1px rgba(1, 6, 29, 0.25);
- 
 }
-label.logo{
+
+label.logo {
     color: white;
     font-size: 35px;
     line-height: 80px;
     padding: 0 100px;
     font-weight: bold;
 }
-nav ul{
+
+nav ul {
     float: right;
     margin-right: 20 px;
 }
-nav ul li{
+
+nav ul li {
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
 }
-nav ul li a{
+
+nav ul li a {
     color: white;
     font-family: 17px;
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
 }
-a.active, a:hover{
+
+a.active,
+a:hover {
     background: #5531f9;
     transition: .5s;
 }
-body{
-    background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=" ) ; 
+
+body {
+    background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=");
     background-size: 100%;
-   background-position: center; 
-   min-height: 100vh;
-   justify-content: center;
-   align-content:center;
+    background-position: center;
+    min-height: 100vh;
+    justify-content: center;
+    align-content: center;
 }
 
-.search-bar{
-    margin-top:2.5%;
+.search-bar {
+    margin-top: 2.5%;
     width: 100%;
     height: 50px;
     max-width: 700px;
-    background: rgba(255, 255,255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     border-radius: 60px;
     padding: 10px 20px;
     margin-left: 25%;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-   
-   
 }
-.search-bar input{
+
+.search-bar input {
     background: transparent;
     flex: 1;
     border: 0;
@@ -75,15 +83,16 @@ body{
     font-size: 20px;
     color: #cac7ff;
     font-family: 'Montserrat', sans-serif;
-
 }
-::placeholder{
+
+::placeholder {
     color: #cac7ff;
 }
-.search-bar button img{
-    width:25px ;
 
+.search-bar button img {
+    width: 25px;
 }
+
 .search-bar button {
     border: 0;
     border-radius: 50%;
@@ -93,8 +102,7 @@ body{
     cursor: pointer;
 }
 
-.card{
-
+.card {
     max-width: 1350px;
     margin-top: 5em;
     margin-left: 2.0em;
@@ -104,6 +112,33 @@ body{
     border-radius: 20px;
     background-color: rgba(61, 79, 171, 0.516);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.60);
-  
-    backdrop-filter:blur(2px);
+    backdrop-filter: blur(2px);
+    margin: 5vh auto;
+}
+
+
+/* Center-align text */
+
+.center-text {
+    text-align: center;
+}
+
+
+/* Style for "Malicious" label */
+
+.malicious {
+    font-weight: bold;
+    color: red;
+}
+
+
+/* Style for "Non-malicious" label */
+
+.non-malicious {
+    font-weight: bold;
+    color: #01ff01;
+}
+
+.result-text {
+    font-weight: bold;
 }
