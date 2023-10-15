@@ -40,14 +40,22 @@
         </div>
 
         <div class="tab-content" id="fileUpload">
-            <center>
+            <center id="file-wrapper">
                 <img src="../static/images/upload.png">
                 <div class="fileUploadText">
                     <input type="file" id="fileInput" name="file">
                     <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
                 </div>
             </center>
-            <div id="response"></div>
+            <center id="progress-wrapper">
+
+                <div class="progress-bar">
+                    <div id="progress">
+                        <p>0</p>
+                    </div>
+                </div>
+                <div id="response"></div>
+            </center>
         </div>
     </div>
 
