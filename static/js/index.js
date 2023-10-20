@@ -1,5 +1,15 @@
 document.getElementsByClassName('tab').item(0).click();
 
+fileInput.addEventListener('change', function() {
+    const fileInput = document.getElementById('fileInput');
+    const fileChosen = document.getElementById('fileInput-label');
+
+    fileChosen.textContent = this.files[0].name
+
+})
+
+
+
 socket = io();
 socket.connect('http://127.0.0.1:5000/');
 
@@ -49,7 +59,7 @@ function uploadFile() {
     xhr.open("POST", "/fileUpload", true);
     xhr.setRequestHeader("enctype", "multipart/form-data");
 
-    // document.getElementById("progress-wrapper").style.display = "block";
+    document.getElementById("progress-wrapper").style.display = "block";
     // document.getElementById("file-wrapper").style.display = "none";
 
     xhr.onreadystatechange = function() {

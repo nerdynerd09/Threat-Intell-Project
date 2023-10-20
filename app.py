@@ -49,7 +49,14 @@ def fileUpload():
     if request.method == 'POST':   
         f = request.files['file'] 
         fileName = f.filename
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], fileName))
+        try:
+            if "Uploads" in os.getcwd():
+                f.save(os.path.join(os.getcwd(),fileName))
+            else:
+                f.save(os.path.join(app.config['UPLOAD_FOLDER'], fileName))
+        except Exception as e:
+            print("file upload exception: ",e)
+
     return '''
     File uploaded successfuly
     '''
@@ -59,8 +66,11 @@ def fileCheck():
         fileName = request.args.get('fileName')
         print("FileName: ",fileName)
 
-    os.chdir("Uploads")
-    filePath = os.path.join(os.getcwd(),fileName)
+    if "Uploads" in os.getcwd():
+        filePath = os.path.join(os.getcwd(),fileName)
+    else:
+        os.chdir("Uploads")
+        filePath = os.path.join(os.getcwd(),fileName)
     print(filePath)
     print("Hash: ",hash_file(filePath))
 

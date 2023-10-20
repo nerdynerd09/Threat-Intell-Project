@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
     <link rel="stylesheet" href="../static/css/test.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 
@@ -40,22 +41,30 @@
         </div>
 
         <div class="tab-content" id="fileUpload">
-            <center id="file-wrapper">
-                <img src="../static/images/upload.png">
-                <div class="fileUploadText">
-                    <input type="file" id="fileInput" name="file">
-                    <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
-                </div>
-            </center>
-            <center id="progress-wrapper">
+            <div class="fileUpload-wrapper">
+                <center id="file-wrapper">
+                    <!-- <img src="../static/images/upload.png"> -->
 
-                <div class="progress-bar">
-                    <div id="progress">
-                        <p>0</p>
+                    <div class="fileUploadText">
+                        <input type="file" id="fileInput" name="file" hidden><br>
+                        <label for="fileInput" id="fileInput-label">Choose File</label><br>
+                        <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
                     </div>
+
+                    <!-- <div class="upload-btn-wrapper">
+                        <button class="btn">Upload a file</button>
+                        <input type="file" name="myfile" />
+                    </div> -->
+                </center>
+                <div id="progress-wrapper">
+
+                    <div class="progress-bar">
+                        <div id="progress">
+                        </div>
+                    </div>
+                    <div id="response"></div>
                 </div>
-                <div id="response"></div>
-            </center>
+            </div>
         </div>
     </div>
 

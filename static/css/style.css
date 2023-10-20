@@ -1,198 +1,228 @@
-* {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    ;
-}
-
-nav {
-    background: #2003a0;
-    height: 80px;
-    width: 100%;
-    box-shadow: 0 0 10px 1px rgba(1, 6, 29, 0.25);
-}
-
-label.logo {
-    color: white;
-    font-size: 35px;
-    line-height: 80px;
-    padding: 0 100px;
-    font-weight: bold;
-}
-
-nav ul {
-    float: right;
-    margin-right: 20 px;
-}
-
-nav ul li {
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
-}
-
-nav ul li a {
-    color: white;
-    font-family: 17px;
-    padding: 7px 13px;
-    border-radius: 3px;
-    text-transform: uppercase;
-}
-
-a.active,
-a:hover {
-    background: #5531f9;
-    transition: .5s;
-}
-
-body {
-    background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=");
-    background-size: 100%;
-    background-position: center;
-    min-height: 100vh;
-    justify-content: center;
-    align-content: center;
-}
-
-.search-bar {
-    width: 100%;
-    height: 50px;
-    max-width: 700px;
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    border-radius: 60px;
-    padding: 10px 20px;
-    /* margin-left: 25%; */
-    margin: auto;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-}
-
-.search-bar input {
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding: 24px 20px;
-    font-size: 20px;
-    color: #cac7ff;
-    font-family: 'Montserrat', sans-serif;
-}
-
-::placeholder {
-    color: #cac7ff;
-}
-
-.search-bar button img {
-    width: 25px;
-}
-
-.search-bar button {
-    border: 0;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background: #58629b;
-    cursor: pointer;
-}
-
-.card {
-    height: 46vh;
-    width: 80%;
-    border: 1px solid rgba(18, 2, 64, 0.18);
-    border-radius: 20px;
-    background-color: rgba(61, 79, 171, 0.516);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.60);
-    backdrop-filter: blur(2px);
-    margin: 15vh auto;
-}
-
-
-/* Center-align text */
-
-.center-text {
-    text-align: center;
-}
-
-
-/* Style for "Malicious" label */
-
-.malicious {
-    font-weight: bold;
-    color: red;
-}
-
-
-/* Style for "Non-malicious" label */
-
-.non-malicious {
-    font-weight: bold;
-    color: #01ff01;
-}
-
-.result-text {
-    font-weight: bold;
-}
-
-#search-button {
-    margin: 0 auto;
-}
-
-
-/* ------------------------------ */
-
-
-/* Tab Container */
-
-.tab-wrapper {
-    width: 50%;
-    margin: 5vh auto;
-    height: 20vh;
-    /* background-color: #01ff01; */
-}
-
-.tab-container {
-    background-color: red;
-    justify-content: space-around;
-    display: flex;
-}
-
-.tab {
-    width: 50%;
-    height: 5vh;
-    text-align: center;
-}
-
-.tab-content {
-    margin: auto;
-    padding-top: 2vh;
-    width: 100%;
-    height: 25vh;
-    background-color: rebeccapurple;
-    justify-content: center;
-}
-
-#fileUpload img {
-    height: 15vh;
-    width: auto;
-    margin-bottom: 2vh;
-    /* background-color: red; */
-}
-
-.progress-bar {
-    width: 10vw;
-    height: 20px;
-    background-color: #ddd;
-}
-
-#progress {
-    width: 0%;
-    height: 100%;
-    background-color: #4CAF50;
-}
+    * {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Montserrat', sans-serif;
+        ;
+    }
+    
+    nav {
+        background: #2003a0;
+        height: 80px;
+        width: 100%;
+        box-shadow: 0 0 10px 1px rgba(1, 6, 29, 0.25);
+    }
+    
+    label.logo {
+        color: white;
+        font-size: 35px;
+        line-height: 80px;
+        padding: 0 100px;
+        font-weight: bold;
+    }
+    
+    nav ul {
+        float: right;
+        margin-right: 20 px;
+    }
+    
+    nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 5px;
+    }
+    
+    nav ul li a {
+        color: white;
+        font-family: 17px;
+        padding: 7px 13px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+    
+    a.active,
+    a:hover {
+        background: #5531f9;
+        transition: .5s;
+    }
+    
+    body {
+        background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=");
+        background-size: 100%;
+        background-position: center;
+        min-height: 100vh;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .search-bar {
+        width: 100%;
+        height: 50px;
+        max-width: 700px;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        border-radius: 60px;
+        padding: 10px 20px;
+        /* margin-left: 25%; */
+        margin: auto;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    }
+    
+    .search-bar input {
+        background: transparent;
+        flex: 1;
+        border: 0;
+        outline: none;
+        padding: 24px 20px;
+        font-size: 20px;
+        color: #cac7ff;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+     ::placeholder {
+        color: #cac7ff;
+    }
+    
+    .search-bar button img {
+        width: 25px;
+    }
+    
+    .search-bar button {
+        border: 0;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        background: #58629b;
+        cursor: pointer;
+    }
+    
+    .card {
+        height: 46vh;
+        width: 80%;
+        border: 1px solid rgba(18, 2, 64, 0.18);
+        border-radius: 20px;
+        background-color: rgba(61, 79, 171, 0.516);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.60);
+        backdrop-filter: blur(2px);
+        margin: 15vh auto;
+    }
+    /* Center-align text */
+    
+    .center-text {
+        text-align: center;
+    }
+    /* Style for "Malicious" label */
+    
+    .malicious {
+        font-weight: bold;
+        color: red;
+    }
+    /* Style for "Non-malicious" label */
+    
+    .non-malicious {
+        font-weight: bold;
+        color: #01ff01;
+    }
+    
+    .result-text {
+        font-weight: bold;
+    }
+    
+    #search-button {
+        margin: 0 auto;
+    }
+    /* ------------------------------ */
+    /* Tab Container */
+    
+    .tab-wrapper {
+        width: 50%;
+        margin: 5vh auto;
+        height: 20vh;
+        /* background-color: #01ff01; */
+    }
+    
+    .tab-container {
+        background-color: red;
+        justify-content: space-around;
+        display: flex;
+    }
+    
+    .tab {
+        width: 50%;
+        height: 5vh;
+        text-align: center;
+    }
+    
+    .tab-content {
+        margin: auto;
+        padding-top: 2vh;
+        width: 100%;
+        height: 25vh;
+        background-color: rebeccapurple;
+        justify-content: center;
+    }
+    
+    .fileUpload-wrapper {
+        display: block;
+    }
+    
+    #fileUpload img {
+        height: 15vh;
+        width: auto;
+        margin-bottom: 2vh;
+        /* background-color: red; */
+    }
+    
+    #fileInput {
+        background-color: white;
+        border: solid;
+        border-width: thin;
+    }
+    
+    #fileInput-label {
+        background-color: white;
+        color: black;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+    
+    #uploadButton {
+        margin: 4vh;
+        background-color: white;
+        color: black;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border: none;
+        border-radius: 0.3rem;
+        margin-top: 1rem;
+    }
+    
+    #progress-wrapper {
+        display: none;
+    }
+    
+    .progress-bar {
+        width: 10vw;
+        height: 20px;
+        background-color: #ddd;
+    }
+    
+    #progress {
+        text-align: center;
+        width: 0%;
+        height: 100%;
+        background-color: #4CAF50;
+    }
+    
+    .progress-text {
+        z-index: 1;
+    }
