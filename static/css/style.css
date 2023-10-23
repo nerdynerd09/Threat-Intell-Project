@@ -243,7 +243,7 @@
     }
     
     #vt-result-text {
-        background-color: red;
+        /* background-color: red; */
         height: 80%;
         width: 80%;
         margin: 0 auto;
