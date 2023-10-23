@@ -70,7 +70,22 @@
 
 
     <div class="card center-text">
-        <p id="result-text"></p>
+        <div class="content-card">
+            <div class="virustotal" style="font-weight: bold;">Virustotal</div>
+            <!-- <ul id="vt-result-text"></ul> -->
+            <ul id="vt-result-text">
+                <li>harmless 63</li>
+                <li>malicious 2</li>
+                <li>suspicious 1</li>
+                <li>undetected 23</li>
+                <li>timeout 0</li>
+            </ul>
+
+        </div>
+        <div class="content-card">
+            <div class="database-match" style="font-weight: bold;">Database</div>
+            <p id="db-result-text"></p>
+        </div>
     </div>
 
     <script src="../static/js/index.js"></script>

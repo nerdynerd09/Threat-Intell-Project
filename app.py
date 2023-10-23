@@ -1,9 +1,10 @@
-import os
+import os,json
 from flask import Flask, render_template, request, jsonify
 from ipScripts.dbFile import dbSearch
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
+from ipScripts.vt import checkIP
 
 UPLOAD_FOLDER = 'Uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','zip','exe'}
@@ -27,16 +28,37 @@ def index():
     return render_template('home.html', result=result)
     # return render_template('home.html')
 
-@app.route('/checkentity',methods=["GET","POST"])
+@app.route('/checkentity',methods=["GET"])
 def checkentitiy():
     result = None
-    if request.method == 'POST':
-        ip = request.form.get('q')
+    if request.method == 'GET':
+
+        # ip = request.form.get('q')
+        ip = request.args.get('ip')
         print(ip)
         result = dbSearch(ip)
         print(result)
 
     socket.emit("checkentity",{'dbResult':result})      
+    return jsonify(isError = False,
+                    message = "Success",
+                    statusCode = 200,
+                    data = result), 200
+
+@app.route('/checkvtip',methods=["GET"])
+def checkvtip():
+    result = None
+    if request.method == 'GET':
+        try:
+            ip = request.args.get('ip')
+            print("VT IP: ",ip)
+        except Exception as e:
+            print(e)
+        result = (checkIP(ip))
+        print(result)        
+        print(type(result))
+
+    socket.emit("checkvtip",{'vtResult':(result)})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,

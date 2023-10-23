@@ -21,7 +21,7 @@ socket.on('connect', function() {
 socket.on('checkentity', function(data) {
     const result = data['dbResult'];
 
-    const resultDiv = document.getElementById("result-text");
+    const resultDiv = document.getElementById("db-result-text");
     if (result === 'Malicious IP') {
         resultDiv.style.color = 'red';
     } else {
@@ -30,19 +30,49 @@ socket.on('checkentity', function(data) {
     resultDiv.innerText = result;
 })
 
+socket.on('checkvtip', function(data) {
+    console.log("I am here")
+    const result = data['vtResult'];
+    console.log(result)
+
+    Object.entries(result).forEach(([key, value]) => {
+        const ulElement = document.getElementById("vt-result-text")
+        const liElement = document.createElement("li");
+        liElement.textContent = `${key.toUpperCase()} ${value}`;
+        ulElement.append(liElement)
+    });
+
+
+})
+
 function checkentity() {
+
     const value = document.getElementById("search-box").value;
-    // console.log(value)
-    // console.log("I amhere")
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/checkentity", true);
 
-    // Send the proper header information along with the request
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr.open("GET", `http://127.0.0.1:5000/checkentity?ip=${value}`, true);
+    xhr.send();
 
 
-    xhr.send(`q=${value}`);
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr2.responseText;
+            console.log(response);
+        }
+    };
 
+    xhr2.open("GET", `http://127.0.0.1:5000/checkvtip?ip=${value}`, true);
+    xhr2.send();
 
 
 }
