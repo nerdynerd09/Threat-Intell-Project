@@ -35,9 +35,9 @@ def checkentitiy():
 
         # ip = request.form.get('q')
         ip = request.args.get('ip')
-        print(ip)
+        # print(ip)
         result = dbSearch(ip)
-        print(result)
+        # print(result)
 
     socket.emit("checkentity",{'dbResult':result})      
     return jsonify(isError = False,
@@ -54,9 +54,9 @@ def checkvtip():
             print("VT IP: ",ip)
         except Exception as e:
             print(e)
-        result = (checkIP(ip))
-        print(result)        
-        print(type(result))
+        result = checkIP(ip)
+        # print(result)        
+        # print(type(result))
 
     socket.emit("checkvtip",{'vtResult':(result)})      
     return jsonify(isError = False,

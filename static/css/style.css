@@ -248,4 +248,15 @@
         width: 80%;
         margin: 0 auto;
         display: grid;
+        overflow-y: scroll;
+    }
+    
+    #vt-result-text li {
+        display: flex;
+        background-color: #01ff01;
+        margin-bottom: 4vh;
+        border-radius: 8px;
+        height: 80%;
+        align-items: center;
+        justify-content: space-around;
     }

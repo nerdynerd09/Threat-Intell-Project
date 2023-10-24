@@ -38,7 +38,14 @@ socket.on('checkvtip', function(data) {
     Object.entries(result).forEach(([key, value]) => {
         const ulElement = document.getElementById("vt-result-text")
         const liElement = document.createElement("li");
-        liElement.textContent = `${key.toUpperCase()} ${value}`;
+        const nameElement = document.createElement("p");
+        const valueElement = document.createElement("p");
+
+        nameElement.textContent = `${key.toUpperCase()}`;
+        valueElement.textContent = ` ${value}`;
+        // liElement.textContent = `${key.toUpperCase()} ${value}`;
+        liElement.append(nameElement);
+        liElement.append(valueElement);
         ulElement.append(liElement)
     });
 
@@ -48,7 +55,8 @@ socket.on('checkvtip', function(data) {
 function checkentity() {
 
     const value = document.getElementById("search-box").value;
-
+    document.getElementById("vt-result-text").innerHTML = "";
+    document.getElementById("db-result-text").innerHTML = "";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
