@@ -30,6 +30,18 @@ socket.on('checkentity', function(data) {
     resultDiv.innerText = result;
 })
 
+socket.on('checkHashValue', function(data) {
+    const result = data['dbResult'];
+
+    const resultDiv = document.getElementById("db-result-text");
+    if (result === 'Malicious hash') {
+        resultDiv.style.color = 'red';
+    } else {
+        resultDiv.style.color = '#01ff01';
+    }
+    resultDiv.innerText = result;
+})
+
 socket.on('checkvtip', function(data) {
     console.log("I am here")
     const result = data['vtResult'];
@@ -48,6 +60,16 @@ socket.on('checkvtip', function(data) {
         liElement.append(valueElement);
         ulElement.append(liElement)
     });
+
+
+})
+
+socket.on('checkvthash', function(data) {
+    console.log("I am here")
+    const result = data['vtResult'];
+    console.log(result)
+
+    document.getElementById("vt-result-text").innerText = result;
 
 
 })

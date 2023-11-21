@@ -1,9 +1,10 @@
-import os,json
+import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from ipScripts.dbFile import dbSearch
+from DbHandler.dbFile import dbSearch,dbHashSearch
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
+from fileScripts.vthashscan import VT_Request
 from ipScripts.vt import checkIP
 
 UPLOAD_FOLDER = 'Uploads'
@@ -82,6 +83,7 @@ def fileUpload():
     return '''
     File uploaded successfuly
     '''
+
 @app.route("/checkFile",methods=["GET"])
 def fileCheck():
     if request.method == "GET":
@@ -94,11 +96,37 @@ def fileCheck():
         os.chdir("Uploads")
         filePath = os.path.join(os.getcwd(),fileName)
     print(filePath)
-    print("Hash: ",hash_file(filePath))
+    fileHashValue = hash_file(filePath)
+    print("Hash: ",fileHashValue)
 
-    return '''
-    File uploaded successfuly
-    '''
+    requests.get(f"http://127.0.0.1:5000/checkvthash?hashValue={fileHashValue}")
+    result = dbHashSearch(fileHashValue)
+
+
+    socket.emit("checkHashValue",{'dbResult':result})      
+    return jsonify(isError = False,
+                    message = "Success",
+                    statusCode = 200,
+                    data = result), 200
+
+@app.route('/checkvthash',methods=["GET"])
+def checkvthash():
+    result = None
+    if request.method == 'GET':
+        try:
+            hashValue = request.args.get('hashValue')
+            print("VT hashValue: ",hashValue)
+        except Exception as e:
+            print(e)
+        result = VT_Request(hashValue)
+        print(result)        
+        # print(type(result))
+
+    socket.emit("checkvthash",{'vtResult':(result)})      
+    return jsonify(isError = False,
+                    message = "Success",
+                    statusCode = 200,
+                    data = result), 200
 
 if __name__ == "__main__":
     socket.run(app,debug=True)

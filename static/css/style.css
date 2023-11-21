@@ -249,6 +249,11 @@
         margin: 0 auto;
         display: grid;
         overflow-y: scroll;
+        overflow-wrap: break-word;
+    }
+    
+    #vt-result-text::-webkit-scrollbar {
+        visibility: hidden;
     }
     
     #vt-result-text li {
@@ -259,4 +264,14 @@
         height: 80%;
         align-items: center;
         justify-content: space-around;
+    }
+    
+    .vt-hash-result {
+        background-color: rebeccapurple;
+        height: 80%;
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        overflow-y: scroll;
+        overflow-wrap: break-word;
     }

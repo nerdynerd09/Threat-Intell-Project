@@ -1,6 +1,6 @@
 import requests,re
 from bs4 import BeautifulSoup
-from dbFile import dbStore
+from DbHandler.dbFile import dbIPStore
 
 def binaryIPCollector():
      
@@ -18,7 +18,7 @@ def binaryIPCollector():
     result = re.findall(r'[0-9].*',str(bsContent))
     resultList =  [[i,"NA"] for i in result]
     
-    dbStore(resultList=resultList)
+    dbIPStore(resultList=resultList)
     print("Done")
 
 binaryIPCollector()

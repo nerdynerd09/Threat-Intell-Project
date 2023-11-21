@@ -11,12 +11,25 @@ mycol = mydb["threatintell"]
 def dbAtlas():
     print((mycol.count_documents({})))
 
-def dbStore(resultList):
+def dbIPStore(resultList):
     # print(result)
     for i in resultList:
         if mycol.find_one({"ip":i[0]}) is None:
             mycol.insert_one({"ip":i[0],"location":i[1]})
 
+def dbHashStore(resultList,pageNumber):
+    # print(result)
+    for i in resultList:
+        if mycol.find_one({"hash":i}) is None:
+            mycol.insert_one({"hash":i})
+        
+    print(f"Data inserted for page number: {pageNumber}")
+
+def dbHashSearch(hashValue):
+    if mycol.find_one({"hash":hashValue}) is None:
+        return "Non-malicious hash"
+    else:
+        return "Malicious hash"
 
 
 def dbSearch(target):
