@@ -46,8 +46,9 @@
         </div>
         <div class="tab-wrapper">
             <div class="tab-container">
-                <div class="tab" onclick="showTab(1)">URL</div>
+                <div class="tab" onclick="showTab(1)">IP</div>
                 <div class="tab" onclick="showTab(2)">File </div>
+                <div class="tab" onclick="showTab(3)">URL</div>
             </div>
 
             <div class="tab-content">
@@ -85,6 +86,20 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-content" id="urlTab">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search URL" name="q" id="url-box">
+                    <button type="submit" onclick="checkUrlEntity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
         </div>
     </div>
 
@@ -110,5 +125,7 @@
 
     <script src="../static/js/index.js"></script>
 </body>
+   
+
 
 </html>
