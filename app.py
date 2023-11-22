@@ -6,6 +6,8 @@ import initialSetup
 from fileScripts.hashgenerator import hash_file
 from fileScripts.vthashscan import VT_Request
 from ipScripts.vt import checkIP
+from threatnews import latestIoC
+
 
 UPLOAD_FOLDER = 'Uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','zip','exe'}
@@ -21,8 +23,7 @@ socket = SocketIO(app)
 @app.route('/', methods=['GET', 'POST'])
 # def threat_intel():
 def index():
-    result = None
-
+    result = latestIoC()
     return render_template('home.html', result=result)
 
 @app.route("/about")

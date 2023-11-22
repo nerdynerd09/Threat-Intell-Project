@@ -139,18 +139,64 @@
     #search-button {
         margin: 0 auto;
     }
+    
+    .body-wrapper {
+        display: flex;
+        /* background-color: red; */
+    }
+    
+    .threat-news-wrapper {
+        height: 55vh;
+        width: 20vw;
+        background-color: white;
+        margin-top: 8vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+        border-radius: 8px;
+        display: flex;
+    }
+    
+    .threat-news-wrapper ul::-webkit-scrollbar {
+        visibility: hidden;
+    }
+    
+    .threat-news-wrapper ul {
+        width: 95%;
+        margin: 4vh auto;
+        overflow: scroll;
+        /* background-color: orange; */
+    }
+    
+    .threat-news-wrapper li {
+        height: 6vh;
+        height: fit-content;
+        padding: 1vh 1vw;
+        width: 95%;
+        margin: 2vh auto;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    }
+    
+    .threat-news-wrapper li a {
+        color: black;
+    }
+    
+    .threat-news-wrapper li a:hover {
+        background-color: transparent;
+    }
     /* ------------------------------ */
     /* Tab Container */
     
     .tab-wrapper {
         width: 50%;
-        margin: 5vh auto;
+        margin: auto 1vw;
         height: 20vh;
         /* background-color: #01ff01; */
     }
     
     .tab-container {
-        background-color: red;
+        /* background-color: red; */
         justify-content: space-around;
         display: flex;
     }

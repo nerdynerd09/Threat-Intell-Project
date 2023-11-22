@@ -24,45 +24,65 @@
         </ul>
     </nav>
 
-    <div class="tab-wrapper">
+    <div class="body-wrapper">
+        <div class="threat-news-wrapper">
+            <ul>
 
-        <div class="tab-container">
-            <div class="tab" onclick="showTab(1)">URL</div>
-            <div class="tab" onclick="showTab(2)">File </div>
+                {% for index in (result) %}
+                <li>
+                    <a target="_blank" href="{{index[1]}}">{{index[0]}}</a>
+                </li>
+                {% endfor %}
+                <!-- <li>
+                    <a href="https://www.google.com">TExt</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com">TExt</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com">TExt</a>
+                </li> -->
+            </ul>
         </div>
-
-        <div class="tab-content">
-
-            <div class="search-bar">
-                <input type="text" placeholder="Search IP" name="q" id="search-box">
-                <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
-
+        <div class="tab-wrapper">
+            <div class="tab-container">
+                <div class="tab" onclick="showTab(1)">URL</div>
+                <div class="tab" onclick="showTab(2)">File </div>
             </div>
-        </div>
 
-        <div class="tab-content" id="fileUpload">
-            <div class="fileUpload-wrapper">
-                <center id="file-wrapper">
-                    <!-- <img src="../static/images/upload.png"> -->
+            <div class="tab-content">
 
-                    <div class="fileUploadText">
-                        <input type="file" id="fileInput" name="file" hidden><br>
-                        <label for="fileInput" id="fileInput-label">Choose File</label><br>
-                        <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
-                    </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search IP" name="q" id="search-box">
+                    <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
 
-                    <!-- <div class="upload-btn-wrapper">
+                </div>
+            </div>
+
+            <div class="tab-content" id="fileUpload">
+                <div class="fileUpload-wrapper">
+                    <center id="file-wrapper">
+                        <!-- <img src="../static/images/upload.png"> -->
+
+                        <div class="fileUploadText">
+                            <input type="file" id="fileInput" name="file" hidden><br>
+                            <label for="fileInput" id="fileInput-label">Choose File</label><br>
+                            <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
+                        </div>
+
+                        <!-- <div class="upload-btn-wrapper">
                         <button class="btn">Upload a file</button>
                         <input type="file" name="myfile" />
                     </div> -->
-                </center>
-                <div id="progress-wrapper">
+                    </center>
+                    <div id="progress-wrapper">
 
-                    <div class="progress-bar">
-                        <div id="progress">
+                        <div class="progress-bar">
+                            <div id="progress">
+                            </div>
                         </div>
+                        <div id="response"></div>
                     </div>
-                    <div id="response"></div>
                 </div>
             </div>
         </div>
