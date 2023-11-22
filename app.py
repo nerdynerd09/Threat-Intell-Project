@@ -6,6 +6,7 @@ import initialSetup
 from fileScripts.hashgenerator import hash_file
 from fileScripts.vthashscan import VT_Request
 from ipScripts.vt import checkIP
+from ipScripts.vt import checkURL
 from threatnews import latestIoC
 
 
@@ -34,6 +35,9 @@ def aboutPage():
 def servicesPage():
     return render_template('services.html')
 
+
+
+
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
     result = None
@@ -50,6 +54,7 @@ def checkentitiy():
                     message = "Success",
                     statusCode = 200,
                     data = result), 200
+    
 
 @app.route('/checkvtip',methods=["GET"])
 def checkvtip():
@@ -113,6 +118,23 @@ def fileCheck():
                     message = "Success",
                     statusCode = 200,
                     data = result), 200
+
+
+
+#  for url 
+
+@app.route('/checkurlentity', methods=["GET"])
+def checkurlentity():
+    result = None
+    if request.method == 'GET':
+        url = request.args.get('url')
+        result = checkURL(url)
+
+    socket.emit("checkurlentity", {'urlResult': result})
+    return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+
+
+
 
 @app.route('/checkvthash',methods=["GET"])
 def checkvthash():
