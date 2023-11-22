@@ -275,3 +275,68 @@
         overflow-y: scroll;
         overflow-wrap: break-word;
     }
+
+    /* About section */
+
+    a {
+        color: #1977cc;
+        text-decoration: none;
+      }
+  
+      a:hover {
+        color: #3291e6;
+        text-decoration: none;
+      }
+  
+      
+      .about-section {
+          
+          
+          padding: 60px 0;
+          background-color: #f1f7fd;
+        }
+        
+  
+      .about-section h2 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        position: relative;
+        color: #2c4964;
+      }
+  
+      .about-section h2::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 120px;
+        height: 1px;
+        background: #ddd;
+        bottom: 1px;
+        left: calc(50% - 60px);
+      }
+  
+      .about-section h2::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 40px;
+        height: 3px;
+        background: #1977cc;
+        bottom: 0;
+        left: calc(50% - 20px);
+      }
+  
+      .about-section p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+      }
+      .about-section {
+          text-align: center;
+        }
+        
+        .about-section h2 {
+          margin: 1;
+        }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="/path/to/favicon.ico" />
+    <title>About VIAA Threat Intel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+    />
+    <link rel="stylesheet" href="../static/css/test.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <label class="logo">VIAA Threat Intel</label>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a class="active" href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="about-section">
+      <h2>About the Company</h2>
+      <p>
+        C3iHub or IHUB NTIHAC FOUNDATION (“the IHUB-IITK”) was set up as a
+        Section-8 company (not-for-profit) at IIT Kanpur under the National
+        Mission on Interdisciplinary Cyber-Physical Systems (NM-ICPS), by the
+        Department of Science and Technology (DST), Government of India.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>About VIAA</h2>
+      <p>
+        In response to the evolving landscape of cyber threats, we present a
+        comprehensive Python-based Threat Intelligence Platform designed to
+        scrutinize URLs, IP addresses, and uploaded files for malicious
+        attributes. Leveraging the VirusTotal API and a MongoDB database
+        populated with open-source malicious IP and file hashes, our solution
+        aims to fortify cybersecurity measures and empower users with proactive
+        threat detection capabilities.
+      </p>
+    </div>
+    <script src="../static/js/index.js"></script>
+  </body>
+</html>
