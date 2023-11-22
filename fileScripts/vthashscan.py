@@ -9,7 +9,7 @@ def VT_Request(hash):
         json_response = url.json()
         response = int(json_response.get('response_code'))
         if response == 0:
-                return (  'Could find in Virus Total')
+                return ( 'Could find in Virus Total')
         elif response == 1:
                 positives = int(json_response.get('positives'))
                 if positives == 0:

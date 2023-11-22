@@ -22,12 +22,12 @@ socket = SocketIO(app)
 # def threat_intel():
 def index():
     result = None
-    # if request.method == 'POST':
-    #     ip = request.form.get('q')
-    #     print(ip)
-    #     result = dbSearch(ip)
+
     return render_template('home.html', result=result)
-    # return render_template('home.html')
+
+@app.route("/about")
+def aboutPage():
+    return render_template('about.html')
 
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
