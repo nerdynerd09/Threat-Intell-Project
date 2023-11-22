@@ -36,8 +36,6 @@ def servicesPage():
     return render_template('services.html')
 
 
-
-
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
     result = None
