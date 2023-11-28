@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -113,6 +113,7 @@ def fileCheck():
     requests.get(f"http://127.0.0.1:5000/checkvthash?hashValue={fileHashValue}")
     result = dbHashSearch(fileHashValue)
 
+    fileScanResult(fileHashValue,{"db":result})
 
     socket.emit("checkHashValue",{'dbResult':result})      
     return jsonify(isError = False,
@@ -148,6 +149,7 @@ def checkvthash():
             print(e)
         result = VT_Request(hashValue)
         print(result)        
+        fileScanResult(hashValue,{"vt":result})
         # print(type(result))
 
     socket.emit("checkvthash",{'vtResult':(result)})      

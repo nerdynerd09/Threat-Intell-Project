@@ -42,3 +42,17 @@ def dbSearch(target):
         return "Malicious IP"
 
 # dbAtlas()
+
+def fileScanResult(hashValue,result):
+   
+    fileHashCol = mydb["fileScanResult"]
+   
+    if fileHashCol.find_one({"hash":hashValue}):
+        resultDict = fileHashCol.find_one({"hash":hashValue})["result"]
+        resultDict[list(result.keys())[0]] = list(result.values())[0]
+        print(resultDict)
+
+        fileHashCol.update_one({"hash":hashValue},{"$set":{"result":resultDict}})
+    else:
+        fileHashCol.insert_one({"hash":hashValue,"result":result})
+
