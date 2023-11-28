@@ -1,0 +1,177 @@
+body {
+    /* background-color: #deeffa !important;
+    overflow-x: hidden;
+    background-image: linear-gradient(rgba(203, 218, 252, 0.6)6), rgba(210, 227, 255, 0.6);
+    background-size: 1600px;
+    background-position: center;
+    color: rgb(168, 203, 252) !important; */
+
+    background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=");
+    background-size: 100%;
+    background-position: center;
+    min-height: 100vh;
+    justify-content: center;
+    align-content: center;
+}
+
+.row1 {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    padding: 2em 2em;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: auto; */
+    margin-top: 0em;
+    padding-top: none;
+
+}
+
+.row2 {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    padding: 2em 2em;
+    justify-content: center;
+    margin-top: 0em;
+    padding-top: 0em;
+}
+
+h1 {
+    margin-top: 0%;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.card {
+
+    position: relative;
+    width: 340px;
+    height: 450px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px;
+
+}
+
+.card .circle {
+
+    position: absolute;
+    top: -190px;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translateX(-50%);
+
+    clip-path: circle();
+}
+
+.card .circle::before {
+
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -16px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 000 30px rgba(0, 187, 255, 0.5);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.circle .imgBox {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 310px;
+}
+
+.imgBox img {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+
+}
+
+.imgBox img {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+
+}
+
+.imgBox img:hover {
+
+    transform: scale(1.2);
+
+}
+
+.card .content {
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    padding: 20px 30px;
+
+}
+
+.content .fa-linkedin {
+
+    padding: 2px 4px;
+    color: #fff;
+    background: #0077b5;
+    border-radius: 2px;
+    align-items: center;
+
+}
+
+.content h3 {
+
+    text-align: center;
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+
+.content .textIcon {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
+
+.content .textIcon h4 {
+
+    text-align: center;
+    color: #e91063;
+    font-weight: 400;
+}
+
+.content .textIcon2 h5 {
+
+    text-align: center;
+    color: #e91063;
+    font-weight: 400;
+    font-size: 17px
+}

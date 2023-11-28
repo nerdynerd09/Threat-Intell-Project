@@ -35,6 +35,9 @@ def aboutPage():
 def servicesPage():
     return render_template('services.html')
 
+@app.route("/contact")
+def contactPage():
+    return render_template('contact.html')
 
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
