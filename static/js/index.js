@@ -154,12 +154,16 @@ function showTab(tabIndex) {
     var tabs = document.querySelectorAll('.tab');
     for (var i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = 'none';
-        tabs[i].style.backgroundColor = '#ccc';
+        // tabs[i].style.backgroundColor = '#ccc';
+        tabs[i].style.backgroundColor = '#2e10c6';
+        tabs[i].style.color = "white"
+
     }
 
     tabContents[tabIndex - 1].style.display = 'flex';
     tabs[tabIndex - 1].style.backgroundColor = '#fff';
-    // tabContents[tabIndex - 1].style.backgroundColor = "white"
+    tabs[tabIndex - 1].style.color = "black"
+        // tabContents[tabIndex - 1].style.backgroundColor = "white"
 }
 
 function checkUrlEntity() {
