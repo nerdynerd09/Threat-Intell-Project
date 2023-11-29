@@ -20,7 +20,7 @@ def checkIP(ip_add):
     # url_info = json_response['data']['attributes']['last_analysis_stats']['malicious']
 
     url_info = json_response['data']['attributes']['last_analysis_stats']
-
+    print(url_info)
     return url_info
     # if url_info > 0:
     #     malicious_ip.append(ip_add)
@@ -32,25 +32,32 @@ def checkIP(ip_add):
 
 
 
-def checkURL(url):
-    malicious_url = []
-    url_vt = "https://www.virustotal.com/api/v3/urls/" + url
+def checkURL(targetUrl):
+    resultList = []
 
+    url = "https://www.virustotal.com/api/v3/urls"
+
+    payload = { "url": targetUrl }
     headers = {
-        "x-apikey": "3dc154ab7a3998f30c0109a316def01db2576e6f8d37daa11ee768be5257b134"
+        "accept": "application/json",
+        "x-apikey": "3dc154ab7a3998f30c0109a316def01db2576e6f8d37daa11ee768be5257b134",
+        "content-type": "application/x-www-form-urlencoded"
     }
 
-    response = requests.get(url_vt, headers=headers)
+    response = requests.post(url, data=payload, headers=headers)
+    # print(response.text)
+        
     json_response = response.json()
 
-    try:
-        last_analysis_stats = json_response['data']['attributes']['last_analysis_stats']
-        if 'malicious' in last_analysis_stats and last_analysis_stats['malicious'] > 0:
-            malicious_url.append(url)
-    except KeyError:
-        # Handle the case where 'data' key is not present in the response
-        return {"error": "Invalid response format"}
+    response2 = requests.get(json_response["data"]["links"]["self"],headers=headers)
+    # print(response2.json()["data"]["attributes"]["stats"]["malicious"])
+    # print(len(response2.json()["data"]["attributes"]["results"]))
 
-    return malicious_url
-    # print(malicious_url)
+    # resultList.append([response2.json()["data"]["attributes"]["stats"]["malicious"],len(response2.json()["data"]["attributes"]["results"])])
+    # return resultList
+    return(response2.json()["data"]["attributes"]["stats"])
+
+# checkURL("https://evil.com/")
+# checkURL("https://term.m4tt72.com/")
+# checkURL("https://google.com/")
 

@@ -55,7 +55,6 @@ def checkentitiy():
                     message = "Success",
                     statusCode = 200,
                     data = result), 200
-    
 
 @app.route('/checkvtip',methods=["GET"])
 def checkvtip():
@@ -68,6 +67,42 @@ def checkvtip():
             print(e)
         result = checkIP(ip)
         # print(result)        
+        # print(type(result))
+
+    socket.emit("checkvtip",{'vtResult':(result)})      
+    return jsonify(isError = False,
+                    message = "Success",
+                    statusCode = 200,
+                    data = result), 200
+
+@app.route('/checkurl',methods=["GET"])
+def checkurl():
+    result = None
+    if request.method == 'GET':
+
+        # ip = request.form.get('q')
+        url = request.args.get('url')
+        # print(ip)
+        result = dbSearch(url)
+        # print(result)
+
+    socket.emit("checkentity",{'dbResult':result})      
+    return jsonify(isError = False,
+                    message = "Success",
+                    statusCode = 200,
+                    data = result), 200
+    
+@app.route('/checkvturl',methods=["GET"])
+def checkvturl():
+    result = None
+    if request.method == 'GET':
+        try:
+            url = request.args.get('url')
+            print("VT URL: ",url)
+        except Exception as e:
+            print(e)
+        result = checkURL(url)
+        print("URL: ",result)
         # print(type(result))
 
     socket.emit("checkvtip",{'vtResult':(result)})      

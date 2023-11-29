@@ -161,3 +161,36 @@ function showTab(tabIndex) {
     tabs[tabIndex - 1].style.backgroundColor = '#fff';
     // tabContents[tabIndex - 1].style.backgroundColor = "white"
 }
+
+function checkUrlEntity() {
+
+    const value = document.getElementById("url-box").value;
+    document.getElementById("vt-result-text").innerHTML = "";
+    document.getElementById("db-result-text").innerHTML = "";
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr.open("GET", `http://127.0.0.1:5000/checkurl?url=${value}`, true);
+    xhr.send();
+
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr2.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr2.open("GET", `http://127.0.0.1:5000/checkvturl?url=${value}`, true);
+    xhr2.send();
+
+
+}
