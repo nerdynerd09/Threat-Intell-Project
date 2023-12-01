@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -85,7 +85,7 @@ def checkurl():
         # ip = request.form.get('q')
         url = request.args.get('url')
         # print(ip)
-        result = dbSearch(url)
+        result = dbURLSearch(url)
         # print(result)
 
     socket.emit("checkentity",{'dbResult':result})      

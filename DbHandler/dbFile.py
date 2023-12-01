@@ -41,6 +41,12 @@ def dbSearch(target):
     else:
         return "Malicious IP"
 
+def dbURLSearch(target):
+    if mycol.find_one({"url":target}) is None:
+        return "Non-malicious URL"
+    else:
+        return "Malicious URL"
+
 # dbAtlas()
 
 def fileScanResult(hashValue,result):
