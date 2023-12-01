@@ -104,7 +104,7 @@
     
     .card {
         height: 46vh;
-        width: 80%;
+        width: 90%;
         border: 1px solid rgba(18, 2, 64, 0.18);
         border-radius: 20px;
         background-color: rgba(61, 79, 171, 0.516);
@@ -301,6 +301,7 @@
         margin: auto auto;
         background-color: white;
         padding-top: 2vh;
+        margin: auto 2vw;
     }
     
     #vt-result-text {
@@ -319,12 +320,14 @@
     
     #vt-result-text li {
         display: flex;
-        background-color: #01ff01;
+        /* background-color: #01ff01; */
+        background-color: white;
         margin-bottom: 4vh;
         border-radius: 8px;
         height: 80%;
         align-items: center;
         justify-content: space-around;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     }
     
     .vt-hash-result {

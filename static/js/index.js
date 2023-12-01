@@ -43,7 +43,7 @@ socket.on('checkHashValue', function(data) {
 })
 
 socket.on('checkvtip', function(data) {
-    console.log("I am here")
+    // console.log("I am here")
     const result = data['vtResult'];
     console.log(result)
 
@@ -65,11 +65,47 @@ socket.on('checkvtip', function(data) {
 })
 
 socket.on('checkvthash', function(data) {
-    console.log("I am here")
+    // console.log("I am here")
     const result = data['vtResult'];
     console.log(result)
 
     document.getElementById("vt-result-text").innerText = result;
+
+
+})
+
+socket.on('checkksipresult', function(data) {
+    const result = data['ipResult'];
+    // console.log(result)
+
+    // document.getElementById("ks-result-text").innerText = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
+    document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
+
+
+})
+
+socket.on('checkkshash', function(data) {
+    console.log("Kaspersky is here")
+    const result = data['ksResult'];
+    console.log(result)
+
+    if (result["Detection Names"] != "") {
+        document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Detection Names: ${result['Detection Names']}</li>`;
+    } else {
+        document.getElementById("ks-result-text").innerHTML = `<li>${result['Zone']}</li>`;
+    }
+
+
+
+})
+
+socket.on('checkksurlresult', function(data) {
+    const result = data['ksResult'];
+    console.log(result)
+        // console.log(result)
+
+    // document.getElementById("ks-result-text").innerText = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
+    document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
 
 
 })
@@ -103,6 +139,18 @@ function checkentity() {
 
     xhr2.open("GET", `http://127.0.0.1:5000/checkvtip?ip=${value}`, true);
     xhr2.send();
+
+    var xhr3 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr2.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr3.open("GET", `http://127.0.0.1:5000/checkksip?ip=${value}`, true);
+    xhr3.send();
 
 
 }
@@ -195,6 +243,18 @@ function checkUrlEntity() {
 
     xhr2.open("GET", `http://127.0.0.1:5000/checkvturl?url=${value}`, true);
     xhr2.send();
+
+    var xhr3 = new XMLHttpRequest();
+    xhr3.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr3.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr3.open("GET", `http://127.0.0.1:5000/checkksurl?url=${value}`, true);
+    xhr3.send();
 
 
 }

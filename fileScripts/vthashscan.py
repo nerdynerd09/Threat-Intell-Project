@@ -9,15 +9,15 @@ def VT_Request(hash):
         json_response = url.json()
         response = int(json_response.get('response_code'))
         if response == 0:
-                return ( 'Could find in Virus Total')
+                return ('Non malicious')
         elif response == 1:
                 positives = int(json_response.get('positives'))
                 if positives == 0:
-                        return ('Not malicious')
+                        return ('Non malicious')
                 else:
                         return ('Malicious')
         else:
-                return ('Could not be searched. Please try again later.')
+                return ('Non malicious')
 
 # def main():
 #         # hashInput='c0202cf6aeab8437c638533d14563d35' #malicious hash
