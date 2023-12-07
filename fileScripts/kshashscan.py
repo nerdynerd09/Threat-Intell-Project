@@ -14,7 +14,7 @@ def kasperskyHash(hashValue):
     try:
         print(response)
         json_response = json.loads(response.text)
-        print(response.text)
+        # print(response.text)
         # print(json_response)
 
         hash_zone = json_response['Zone']
@@ -36,4 +36,4 @@ def kasperskyHash(hashValue):
     except Exception as e:
         return {"Zone":"Non Malicious","Detection Names":""}
 
-# kasperskyHash('5724f1c2bece8e298379caa87cfcc57a')
+# kasperskyHash('A5085E571857EC54CF9625050DFC29A195DAD4D52BEA9B69D3F22E33ED636525')

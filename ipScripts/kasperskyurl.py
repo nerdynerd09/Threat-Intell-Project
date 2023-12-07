@@ -31,6 +31,7 @@ def kasperskyURL(urlValue):
         categories_with_zone = (json_response['DomainGeneralInfo']['CategoriesWithZone'])
         category_names = [category['Name'] for category in categories_with_zone]
         # category_names=str(json_response['DomainGeneralInfo']['Categories'])
+        # print(category_names)
         # print('URL Category:', str(category_names[0]))
     
     resultDict['Zone'] = url_zone
@@ -39,4 +40,5 @@ def kasperskyURL(urlValue):
     print (resultDict)
     return resultDict
 
-# kasperskyURL("collaboratemedaltrips.com")
+kasperskyURL("collaboratemedaltrips.com")
+# kasperskyURL("evil.com")

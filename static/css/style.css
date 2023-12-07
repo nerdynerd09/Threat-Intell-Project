@@ -18,6 +18,16 @@
         box-shadow: 0 0 10px 1px rgba(1, 6, 29, 0.25);
     }
     
+    .outer-body-wrapper {
+        display: flex;
+    }
+    
+    .inner-body-wrapper {
+        margin-top: 2vh;
+        width: 80vw;
+        height: 85vh;
+    }
+    
     label.logo {
         color: white;
         font-size: 35px;
@@ -110,7 +120,7 @@
         background-color: rgba(61, 79, 171, 0.516);
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.60);
         backdrop-filter: blur(2px);
-        margin: 15vh auto;
+        margin: 15vh 1vw;
         display: flex;
         justify-content: space-between;
     }
@@ -146,7 +156,7 @@
     }
     
     .threat-news-wrapper {
-        height: 55vh;
+        height: 67vh;
         width: 20vw;
         background-color: white;
         margin-top: 8vh;
@@ -189,7 +199,7 @@
     /* Tab Container */
     
     .tab-wrapper {
-        width: 50%;
+        width: 90%;
         margin: auto 1vw;
         height: 20vh;
         /* background-color: #01ff01; */
@@ -338,4 +348,49 @@
         display: grid;
         overflow-y: scroll;
         overflow-wrap: break-word;
+    }
+    
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    
+    .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+    
+    .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+    
+    .tg .tg-1wig {
+        font-weight: bold;
+        text-align: left;
+        vertical-align: top
+    }
+    
+    .tg .tg-0lax {
+        text-align: left;
+        vertical-align: top
+    }
+    
+    .tg .tg-amwm {
+        font-weight: bold;
+        text-align: center;
+        vertical-align: top
     }

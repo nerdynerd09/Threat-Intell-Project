@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
     <link rel="stylesheet" href="../static/css/test.css">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 
@@ -17,45 +18,114 @@
         <label class="logo">VIAA Threat Intel</label>
         <ul>
             <li><a class="active" href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
 
-    <div class="tab-wrapper">
+    <div class="outer-body-wrapper">
+        <div class="threat-news-wrapper">
+            <ul>
 
-        <div class="tab-container">
-            <div class="tab" onclick="showTab(1)">URL</div>
-            <div class="tab" onclick="showTab(2)">File </div>
+                {% for index in (result) %}
+                <li>
+                    <a target="_blank" href="{{index[1]}}">{{index[0]}}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
+        <div class="inner-body-wrapper">
+            <div class="body-wrapper">
 
-        <div class="tab-content">
+                <div class="tab-wrapper">
+                    <div class="tab-container">
+                        <!-- <div class="tab" onclick="showTab(1)">IP</div> -->
+                        <div class="tab" style="border-top-left-radius: 8px;" onclick="showTab(1)">IP</div>
+                        <div class="tab" onclick="showTab(2)">File </div>
+                        <div class="tab" style="border-top-right-radius: 8px;" onclick="showTab(3)">URL</div>
+                        <!-- <div class="tab" onclick="showTab(3)">URL</div> -->
+                    </div>
 
-            <div class="search-bar">
-                <input type="text" placeholder="Search IP" name="q" id="search-box">
-                <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+                    <div class="tab-content">
 
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search IP" name="q" id="search-box">
+                            <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="fileUpload">
+                        <div class="fileUpload-wrapper">
+                            <center id="file-wrapper">
+                                <!-- <img src="../static/images/upload.png"> -->
+
+                                <div class="fileUploadText">
+                                    <input type="file" id="fileInput" name="file" hidden><br>
+                                    <label for="fileInput" id="fileInput-label">Choose File</label><br>
+                                    <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
+                                </div>
+
+                                <!-- <div class="upload-btn-wrapper">
+                        <button class="btn">Upload a file</button>
+                        <input type="file" name="myfile" />
+                    </div> -->
+
+                            </center>
+                            <div id="progress-wrapper">
+
+                                <div class="progress-bar">
+                                    <div id="progress">
+                                    </div>
+                                </div>
+                                <div id="response"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="urlTab">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search URL" name="q" id="url-box">
+                            <button type="submit" onclick="checkUrlEntity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card center-text">
+                <div class="content-card">
+                    <h2>Results</h2>
+                    <ul>
+                        <li>
+                            <p>Virustotal</p>
+                            <p>0/90</p>
+                        </li>
+                        <li>
+                            <p>Virustotal</p>
+                            <p>0/90</p>
+                        </li>
+                        <li>
+                            <p>Virustotal</p>
+                            <p>0/90</p>
+                        </li>
+                        <li>
+                            <p>Virustotal</p>
+                            <p>0/90</p>
+                        </li>
+                        <li>
+                            <p>Virustotal</p>
+                            <p>0/90</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-
-        <div class="tab-content" id="fileUpload">
-            <center>
-                <img src="../static/images/upload.png">
-                <div class="fileUploadText">
-                    <input type="file" id="fileInput" name="file">
-                    <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
-                </div>
-            </center>
-        </div>
+        <script src="../static/js/index.js"></script>
     </div>
-
-
-    <div class="card center-text">
-        <p id="result-text"></p>
-    </div>
-
-    <script src="../static/js/index.js"></script>
 </body>
+
+
 
 </html>

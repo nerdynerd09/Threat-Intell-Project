@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
-    <link rel="stylesheet" href="../static/css/test.css">
+    <!-- <link rel="stylesheet" href="../static/css/test.css"> -->
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
@@ -24,7 +24,7 @@
         </ul>
     </nav>
 
-    <div class="body-wrapper">
+    <div class="outer-body-wrapper">
         <div class="threat-news-wrapper">
             <ul>
 
@@ -35,92 +35,115 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="tab-wrapper">
-            <div class="tab-container">
-                <div class="tab" onclick="showTab(1)">IP</div>
-                <div class="tab" onclick="showTab(2)">File </div>
-                <div class="tab" onclick="showTab(3)">URL</div>
-            </div>
+        <div class="inner-body-wrapper">
+            <div class="body-wrapper">
 
-            <div class="tab-content">
+                <div class="tab-wrapper">
+                    <div class="tab-container">
+                        <!-- <div class="tab" onclick="showTab(1)">IP</div> -->
+                        <div class="tab" style="border-top-left-radius: 8px;" onclick="showTab(1)">IP</div>
+                        <div class="tab" onclick="showTab(2)">File </div>
+                        <div class="tab" style="border-top-right-radius: 8px;" onclick="showTab(3)">URL</div>
+                        <!-- <div class="tab" onclick="showTab(3)">URL</div> -->
+                    </div>
 
-                <div class="search-bar">
-                    <input type="text" placeholder="Search IP" name="q" id="search-box">
-                    <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+                    <div class="tab-content">
 
-                </div>
-            </div>
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search IP" name="q" id="search-box">
+                            <button type="submit" onclick="checkentity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
 
-            <div class="tab-content" id="fileUpload">
-                <div class="fileUpload-wrapper">
-                    <center id="file-wrapper">
-                        <!-- <img src="../static/images/upload.png"> -->
-
-                        <div class="fileUploadText">
-                            <input type="file" id="fileInput" name="file" hidden><br>
-                            <label for="fileInput" id="fileInput-label">Choose File</label><br>
-                            <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
                         </div>
+                    </div>
 
-                        <!-- <div class="upload-btn-wrapper">
+                    <div class="tab-content" id="fileUpload">
+                        <div class="fileUpload-wrapper">
+                            <center id="file-wrapper">
+                                <!-- <img src="../static/images/upload.png"> -->
+
+                                <div class="fileUploadText">
+                                    <input type="file" id="fileInput" name="file" hidden><br>
+                                    <label for="fileInput" id="fileInput-label">Choose File</label><br>
+                                    <input type="button" value="Upload" id="uploadButton" onclick="uploadFile()">
+                                </div>
+
+                                <!-- <div class="upload-btn-wrapper">
                         <button class="btn">Upload a file</button>
                         <input type="file" name="myfile" />
                     </div> -->
-                    </center>
-                    <div id="progress-wrapper">
 
-                        <div class="progress-bar">
-                            <div id="progress">
+                            </center>
+                            <div id="progress-wrapper">
+
+                                <div class="progress-bar">
+                                    <div id="progress">
+                                    </div>
+                                </div>
+                                <div id="response"></div>
                             </div>
                         </div>
-                        <div id="response"></div>
+                    </div>
+
+                    <div class="tab-content" id="urlTab">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search URL" name="q" id="url-box">
+                            <button type="submit" onclick="checkUrlEntity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-content" id="urlTab">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search URL" name="q" id="url-box">
-                    <button type="submit" onclick="checkUrlEntity()"><img id="search-button" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png"></button>
-                </div>
-            </div>
 
+            <div class="card center-text">
+                <div class="content-card">
+                    <div class="virustotal" style="font-weight: bold; margin-bottom:2vh;">Virustotal</div>
+                    <ul id="vt-result-text"></ul>
 
-
-
-
-
-
-
-        </div>
-    </div>
-
-
-    <div class="card center-text">
-        <div class="content-card">
-            <div class="virustotal" style="font-weight: bold; margin-bottom:2vh;">Virustotal</div>
-            <ul id="vt-result-text"></ul>
-
-            <!-- <ul id="vt-result-text">
+                    <!-- <ul id="vt-result-text">
                 <li>
                     <p>harmless</p>
                     <p>63</p>
                 </li>
             </ul> -->
 
-        </div>
-        <div class="content-card">
-            <div class="kaspersky-match" style="font-weight: bold;">Kaspersky</div>
-            <p id="ks-result-text"></p>
-        </div>
+                </div>
+                <div class="content-card">
+                    <div class="kaspersky-match" style="font-weight: bold;">Kaspersky</div>
+                    <p id="ks-result-text"></p>
 
-        <div class="content-card">
-            <div class="database-match" style="font-weight: bold;">Database</div>
-            <p id="db-result-text"></p>
+                    <table class="tg">
+                        <thead>
+                            <tr>
+                                <th class="tg-0lax">Zone</th>
+                                <th class="tg-0lax">Red</th>
+                                <th class="tg-0lax">Orange</th>
+                                <th class="tg-0lax">Yellow</th>
+                                <th class="tg-0lax">Grey</th>
+                                <th class="tg-0lax">Green</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tg-baqh">Danger Level</td>
+                                <td class="tg-0lax">High</td>
+                                <td class="tg-0lax">Medium</td>
+                                <td class="tg-0lax">Medium</td>
+                                <td class="tg-0lax">Info</td>
+                                <td class="tg-0lax">Low</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <img id="ks-zone-status" src="../static/images/kaspersky.jpeg"> -->
+                </div>
+
+                <div class="content-card">
+                    <div class="database-match" style="font-weight: bold;">Database</div>
+                    <p id="db-result-text"></p>
+                </div>
+            </div>
         </div>
+        <script src="../static/js/index.js"></script>
     </div>
-
-    <script src="../static/js/index.js"></script>
 </body>
 
 
