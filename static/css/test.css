@@ -291,19 +291,27 @@ body {
 
 #progress-wrapper {
     display: none;
+    /* margin: auto auto; */
 }
 
 .progress-bar {
-    width: 10vw;
+    width: 20vw;
     height: 20px;
-    background-color: #ddd;
+    /* background-color: #ddd; */
+    margin: auto auto;
+}
+
+#response {
+    text-align: center;
 }
 
 #progress {
     text-align: center;
     width: 0%;
     height: 100%;
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
+    background-color: #25eb2c;
+    border-radius: 8px;
 }
 
 .progress-text {

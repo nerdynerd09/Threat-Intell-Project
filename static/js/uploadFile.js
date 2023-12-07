@@ -13,9 +13,9 @@ function uploadFile() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                document.getElementById("response").innerHTML = "File uploaded successfully.";
+                document.getElementById("response").innerText = "File uploaded successfully.";
             } else {
-                document.getElementById("response").innerHTML = "File upload failed.";
+                document.getElementById("response").innerText = "File upload failed.";
             }
         }
     };
@@ -23,6 +23,7 @@ function uploadFile() {
     xhr.upload.onprogress = function(event) {
         var progress = (event.loaded / event.total) * 100;
         console.log(progress);
+
         document.getElementById("progress").style.width = `${progress}%`;
         document.getElementById("progress").innerText = `${Math.floor(progress)}%`;
 

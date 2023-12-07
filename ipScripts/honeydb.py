@@ -1,4 +1,4 @@
-import requests
+import requests,json
 
 def honeyDB(ipValue):
     headers = {
@@ -8,9 +8,12 @@ def honeyDB(ipValue):
 
     response = requests.get(f'https://honeydb.io/api/ipinfo/{ipValue}', headers=headers)
 
-    print(response.text)
+    if json.loads(response.text)["is_threat"] == True:
+        result = "Malicious"
+    else:
+        result = "Safe"
 
-
+    return result
 # ip = "65.49.20.67"
 # ip = "218.92.0.208"
 # honeyDB(ip)

@@ -1,8 +1,8 @@
 import requests 
 import json
 # ip_add='103.186.28.56' #malicious
-ip_add='223.8.213.228' #malicious
-# ip_add='107.178.17.33' # not malicious
+# ip_add='223.8.213.228' #malicious
+ip_add='107.178.17.33' # not malicious
 # ip_add='216.58.194.174' #not malicious 
 # ip_add='185.255.81.2'
 
@@ -20,8 +20,13 @@ def checkIP(ip_add):
     # url_info = json_response['data']['attributes']['last_analysis_stats']['malicious']
 
     url_info = json_response['data']['attributes']['last_analysis_stats']
-    print(url_info)
-    return url_info
+
+    if url_info['malicious']>0:
+        result = "Malicious"
+    else:
+        result = "Non Malicious"
+    # print(result)
+    return result
     # if url_info > 0:
     #     malicious_ip.append(ip_add)
     # else:
@@ -30,6 +35,7 @@ def checkIP(ip_add):
     # print(malicious_ip)
 
 
+# checkIP(ip_add)
 
 
 def checkURL(targetUrl):

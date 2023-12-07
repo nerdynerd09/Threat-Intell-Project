@@ -11,6 +11,7 @@ from threatnews import latestIoC
 from ipScripts.kasperskyip import kasperskyIP
 from fileScripts.kshashscan import kasperskyHash
 from ipScripts.kasperskyurl import kasperskyURL
+from ipScripts.honeydb import honeyDB
 
 UPLOAD_FOLDER = 'Uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','zip','exe'}
@@ -27,7 +28,8 @@ socket = SocketIO(app)
 # def threat_intel():
 def index():
     result = latestIoC()
-    return render_template('home.html', result=result)
+    # return render_template('home.html', result=result)
+    return render_template('test.html', result=result)
 
 @app.route("/about")
 def aboutPage():
@@ -64,7 +66,7 @@ def checkvtip():
     if request.method == 'GET':
         try:
             ip = request.args.get('ip')
-            print("VT IP: ",ip)
+            # print("VT IP: ",ip)
         except Exception as e:
             print(e)
         result = checkIP(ip)
@@ -199,8 +201,17 @@ def checkksip():
     if request.method == 'GET':
         ipValue = request.args.get('ip')
         result = kasperskyIP(ipValue)
-        print("Result from ks: ",result)
     socket.emit("checkksipresult", {'ipResult': result})
+    return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+
+@app.route('/honeyDBIP', methods=["GET"])
+def checkhoneydbip():
+    result = None
+    if request.method == 'GET':
+        ipValue = request.args.get('ip')
+        result = honeyDB(ipValue)
+        # print("Result from HoneyDB: ",result)
+    socket.emit("checkhoneydbipresult", {'ipResult': result})
     return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
 
 

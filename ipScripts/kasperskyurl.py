@@ -40,5 +40,5 @@ def kasperskyURL(urlValue):
     print (resultDict)
     return resultDict
 
-kasperskyURL("collaboratemedaltrips.com")
+# kasperskyURL("collaboratemedaltrips.com")
 # kasperskyURL("evil.com")
