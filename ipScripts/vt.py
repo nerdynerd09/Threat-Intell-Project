@@ -39,8 +39,6 @@ def checkIP(ip_add):
 
 
 def checkURL(targetUrl):
-    resultList = []
-
     url = "https://www.virustotal.com/api/v3/urls"
 
     payload = { "url": targetUrl }
@@ -56,12 +54,11 @@ def checkURL(targetUrl):
     json_response = response.json()
 
     response2 = requests.get(json_response["data"]["links"]["self"],headers=headers)
-    # print(response2.json()["data"]["attributes"]["stats"]["malicious"])
-    # print(len(response2.json()["data"]["attributes"]["results"]))
-
-    # resultList.append([response2.json()["data"]["attributes"]["stats"]["malicious"],len(response2.json()["data"]["attributes"]["results"])])
-    # return resultList
-    return(response2.json()["data"]["attributes"]["stats"])
+    if(response2.json()["data"]["attributes"]["stats"]["malicious"])>0:
+        return "Malicious"
+    else:
+        return "Safe"
+    # return(response2.json()["data"]["attributes"]["stats"])
 
 # checkURL("https://evil.com/")
 # checkURL("https://term.m4tt72.com/")

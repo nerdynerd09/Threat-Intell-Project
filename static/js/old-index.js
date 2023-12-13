@@ -1,4 +1,5 @@
 document.getElementsByClassName('tab').item(0).click();
+
 fileInput.addEventListener('change', function() {
     const fileInput = document.getElementById('fileInput');
     const fileChosen = document.getElementById('fileInput-label');
@@ -16,6 +17,19 @@ socket.on('connect', function() {
     socket.send('a')
 })
 
+
+socket.on('checkentity', function(data) {
+    const result = data['dbResult'];
+
+    const resultDiv = document.getElementById("db-result-text");
+    if (result === 'Malicious IP') {
+        resultDiv.style.color = 'red';
+    } else {
+        resultDiv.style.color = '#01ff01';
+    }
+    resultDiv.innerText = result;
+})
+
 socket.on('checkHashValue', function(data) {
     const result = data['dbResult'];
 
@@ -28,6 +42,27 @@ socket.on('checkHashValue', function(data) {
     resultDiv.innerText = result;
 })
 
+socket.on('checkvtip', function(data) {
+    // console.log("I am here")
+    const result = data['vtResult'];
+    console.log(result)
+
+    Object.entries(result).forEach(([key, value]) => {
+        const ulElement = document.getElementById("vt-result-text")
+        const liElement = document.createElement("li");
+        const nameElement = document.createElement("p");
+        const valueElement = document.createElement("p");
+
+        nameElement.textContent = `${key.toUpperCase()}`;
+        valueElement.textContent = ` ${value}`;
+        // liElement.textContent = `${key.toUpperCase()} ${value}`;
+        liElement.append(nameElement);
+        liElement.append(valueElement);
+        ulElement.append(liElement)
+    });
+
+
+})
 
 socket.on('checkvthash', function(data) {
     // console.log("I am here")
@@ -39,6 +74,15 @@ socket.on('checkvthash', function(data) {
 
 })
 
+socket.on('checkksipresult', function(data) {
+    const result = data['ipResult'];
+    // console.log(result)
+
+    // document.getElementById("ks-result-text").innerText = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
+    document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
+
+
+})
 
 socket.on('checkkshash', function(data) {
     console.log("Kaspersky is here")
@@ -69,9 +113,8 @@ socket.on('checkksurlresult', function(data) {
 function checkentity() {
 
     const value = document.getElementById("search-box").value;
-    document.getElementById("result-ul-list").innerHTML = ""
-        // document.getElementById("vt-result-text").innerHTML = "";
-        // document.getElementById("db-result-text").innerHTML = "";
+    document.getElementById("vt-result-text").innerHTML = "";
+    document.getElementById("db-result-text").innerHTML = "";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -108,18 +151,6 @@ function checkentity() {
 
     xhr3.open("GET", `http://127.0.0.1:5000/checkksip?ip=${value}`, true);
     xhr3.send();
-
-    var xhr4 = new XMLHttpRequest();
-    xhr4.onreadystatechange = function() {
-        if (xhr2.readyState === 4 && xhr2.status === 200) {
-            // Step 5: Handle the response
-            var response = xhr2.responseText;
-            console.log(response);
-        }
-    };
-
-    xhr4.open("GET", `http://127.0.0.1:5000/honeyDBIP?ip=${value}`, true);
-    xhr4.send();
 
 
 }

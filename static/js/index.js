@@ -1,5 +1,4 @@
 document.getElementsByClassName('tab').item(0).click();
-
 fileInput.addEventListener('change', function() {
     const fileInput = document.getElementById('fileInput');
     const fileChosen = document.getElementById('fileInput-label');
@@ -18,86 +17,12 @@ socket.on('connect', function() {
 })
 
 
-socket.on('checkentity', function(data) {
-    const result = data['dbResult'];
-
-    const resultDiv = document.getElementById("db-result-text");
-    if (result === 'Malicious IP') {
-        resultDiv.style.color = 'red';
-    } else {
-        resultDiv.style.color = '#01ff01';
-    }
-    resultDiv.innerText = result;
-})
-
-socket.on('checkHashValue', function(data) {
-    const result = data['dbResult'];
-
-    const resultDiv = document.getElementById("db-result-text");
-    if (result === 'Malicious hash') {
-        resultDiv.style.color = 'red';
-    } else {
-        resultDiv.style.color = '#01ff01';
-    }
-    resultDiv.innerText = result;
-})
-
-socket.on('checkvtip', function(data) {
-    // console.log("I am here")
-    const result = data['vtResult'];
-    console.log(result)
-
-    Object.entries(result).forEach(([key, value]) => {
-        const ulElement = document.getElementById("vt-result-text")
-        const liElement = document.createElement("li");
-        const nameElement = document.createElement("p");
-        const valueElement = document.createElement("p");
-
-        nameElement.textContent = `${key.toUpperCase()}`;
-        valueElement.textContent = ` ${value}`;
-        // liElement.textContent = `${key.toUpperCase()} ${value}`;
-        liElement.append(nameElement);
-        liElement.append(valueElement);
-        ulElement.append(liElement)
-    });
-
-
-})
-
-socket.on('checkvthash', function(data) {
-    // console.log("I am here")
-    const result = data['vtResult'];
-    console.log(result)
-
-    document.getElementById("vt-result-text").innerText = result;
-
-
-})
-
-socket.on('checkksipresult', function(data) {
-    const result = data['ipResult'];
-    // console.log(result)
-
-    // document.getElementById("ks-result-text").innerText = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
-    document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Category: ${result['Category']}</li>`;
-
-
-})
-
-socket.on('checkkshash', function(data) {
-    console.log("Kaspersky is here")
-    const result = data['ksResult'];
-    console.log(result)
-
-    if (result["Detection Names"] != "") {
-        document.getElementById("ks-result-text").innerHTML = `<li>Zone: ${result['Zone']}</li><li>Detection Names: ${result['Detection Names']}</li>`;
-    } else {
-        document.getElementById("ks-result-text").innerHTML = `<li>${result['Zone']}</li>`;
-    }
 
 
 
-})
+
+
+
 
 socket.on('checkksurlresult', function(data) {
     const result = data['ksResult'];
@@ -113,8 +38,9 @@ socket.on('checkksurlresult', function(data) {
 function checkentity() {
 
     const value = document.getElementById("search-box").value;
-    document.getElementById("vt-result-text").innerHTML = "";
-    document.getElementById("db-result-text").innerHTML = "";
+    document.getElementById("result-ul-list").innerHTML = ""
+        // document.getElementById("vt-result-text").innerHTML = "";
+        // document.getElementById("db-result-text").innerHTML = "";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -152,6 +78,30 @@ function checkentity() {
     xhr3.open("GET", `http://127.0.0.1:5000/checkksip?ip=${value}`, true);
     xhr3.send();
 
+    var xhr4 = new XMLHttpRequest();
+    xhr4.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr2.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr4.open("GET", `http://127.0.0.1:5000/honeyDBIP?ip=${value}`, true);
+    xhr4.send();
+
+    var xhr5 = new XMLHttpRequest();
+    xhr5.onreadystatechange = function() {
+        if (xhr2.readyState === 4 && xhr2.status === 200) {
+            // Step 5: Handle the response
+            var response = xhr2.responseText;
+            console.log(response);
+        }
+    };
+
+    xhr5.open("GET", `http://127.0.0.1:5000/abuseDBIP?ip=${value}`, true);
+    xhr5.send();
+
 
 }
 
@@ -168,6 +118,7 @@ function uploadFile() {
     xhr.setRequestHeader("enctype", "multipart/form-data");
 
     document.getElementById("progress-wrapper").style.display = "block";
+
     // document.getElementById("file-wrapper").style.display = "none";
 
     xhr.onreadystatechange = function() {
@@ -217,8 +168,10 @@ function showTab(tabIndex) {
 function checkUrlEntity() {
 
     const value = document.getElementById("url-box").value;
-    document.getElementById("vt-result-text").innerHTML = "";
-    document.getElementById("db-result-text").innerHTML = "";
+    // document.getElementById("vt-result-text").innerHTML = "";
+    // document.getElementById("db-result-text").innerHTML = "";
+    document.getElementById("result-ul-list").innerHTML = ""
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -258,3 +211,12 @@ function checkUrlEntity() {
 
 
 }
+
+
+// function dropDown() {
+//     console.log("DropDown called")
+
+//     // document.getElementsByClassName("dropdownItems")[0].style.display = "block";
+
+//     document.getElementsByClassName("dropdownItems")[0].classList.toggle("showdropdownItems")
+// }

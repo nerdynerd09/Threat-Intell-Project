@@ -1,7 +1,7 @@
 import requests
 
 def VT_Request(hash):
-        
+        resultDict = {}    
         key = '3dc154ab7a3998f30c0109a316def01db2576e6f8d37daa11ee768be5257b134'
 
         params = {'apikey': key, 'resource': hash}
@@ -9,15 +9,17 @@ def VT_Request(hash):
         json_response = url.json()
         response = int(json_response.get('response_code'))
         if response == 0:
-                return ('Non malicious')
+                resultDict["Status"] = "Safe"
         elif response == 1:
                 positives = int(json_response.get('positives'))
                 if positives == 0:
-                        return ('Non malicious')
+                        resultDict["Status"] = "Safe"
                 else:
-                        return ('Malicious')
+                        resultDict["Status"] = "Malicious"
         else:
-                return ('Non malicious')
+                resultDict["Status"] = "Safe"
+        
+        return resultDict
 
 # def main():
 #         # hashInput='c0202cf6aeab8437c638533d14563d35' #malicious hash

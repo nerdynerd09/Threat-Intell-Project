@@ -1,7 +1,7 @@
 import requests
 import json
 
-def abuseIPDB(ipValue):
+def abuseIPDBFunc(ipValue):
     # Defining the api-endpoint
     url = 'https://api.abuseipdb.com/api/v2/check'
 
@@ -21,6 +21,7 @@ def abuseIPDB(ipValue):
     # Formatted output
     decodedResponse = json.loads(response.text)["data"]["abuseConfidenceScore"]
     print(decodedResponse)
+    return decodedResponse
     # print (json.dumps(decodedResponse, sort_keys=True, indent=4))
 
 # abuseIPDB("65.49.20.67")

@@ -28,16 +28,27 @@ def kasperskyURL(urlValue):
     url_zone=json_response['Zone']
     # print('Zone: '+ url_zone)
     if(url_zone=='Red' or url_zone == 'Orange' or url_zone=='Yellow'):
-        categories_with_zone = (json_response['DomainGeneralInfo']['CategoriesWithZone'])
-        category_names = [category['Name'] for category in categories_with_zone]
+        try:
+            categories_with_zone = (json_response['DomainGeneralInfo']['CategoriesWithZone'])
+            category_names = [category['Name'] for category in categories_with_zone]
+        except Exception as e:
+            category_names = [""]
+
+        resultDict["Status"] = "Malicious"
+    
+    elif json_response["Zone"] == "Green":
+        resultDict["Status"] = "Safe"
+
+    elif json_response["Zone"] == "Grey":
+        resultDict["Status"] = "Untrusted"
         # category_names=str(json_response['DomainGeneralInfo']['Categories'])
         # print(category_names)
         # print('URL Category:', str(category_names[0]))
     
-    resultDict['Zone'] = url_zone
-    resultDict['Category'] = category_names[0].split("_")[1]
+    # resultDict['Zone'] = url_zone
+    # resultDict['Category'] = category_names[0].split("_")[1]
 
-    print (resultDict)
+    # print(resultDict)
     return resultDict
 
 # kasperskyURL("collaboratemedaltrips.com")

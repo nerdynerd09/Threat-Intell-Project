@@ -14,6 +14,8 @@ def honeyDB(ipValue):
         result = "Safe"
 
     return result
+
+
 # ip = "65.49.20.67"
 # ip = "218.92.0.208"
 # honeyDB(ip)

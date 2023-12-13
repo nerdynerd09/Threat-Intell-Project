@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap">
-    <link rel="stylesheet" href="../static/css/test.css">
-    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="../static/css/test.css"> -->
+    <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 
@@ -96,35 +96,53 @@
 
             <div class="card center-text">
                 <div class="content-card">
-                    <h2>Results</h2>
-                    <ul id="result-ul-list">
-                        <!-- <li>
-                            <p>Virustotal</p>
-                            <p>0/90</p>
-                        </li>
-                        <li>
-                            <p>Virustotal</p>
-                            <p>0/90</p>
-                        </li>
-                        <li>
-                            <p>Virustotal</p>
-                            <p>0/90</p>
-                        </li>
-                        <li>
-                            <p>Virustotal</p>
-                            <p>0/90</p>
-                        </li>
-                        <li>
-                            <p>Virustotal</p>
-                            <p>0/90</p>
-                        </li> -->
-                    </ul>
+                    <div class="virustotal" style="font-weight: bold; margin-bottom:2vh;">Virustotal</div>
+                    <ul id="vt-result-text"></ul>
+
+                    <!-- <ul id="vt-result-text">
+                <li>
+                    <p>harmless</p>
+                    <p>63</p>
+                </li>
+            </ul> -->
+
+                </div>
+                <div class="content-card">
+                    <div class="kaspersky-match" style="font-weight: bold;">Kaspersky</div>
+                    <p id="ks-result-text"></p>
+
+                    <table class="tg">
+                        <thead>
+                            <tr>
+                                <th class="tg-0lax">Zone</th>
+                                <th class="tg-0lax">Red</th>
+                                <th class="tg-0lax">Orange</th>
+                                <th class="tg-0lax">Yellow</th>
+                                <th class="tg-0lax">Grey</th>
+                                <th class="tg-0lax">Green</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tg-baqh">Danger Level</td>
+                                <td class="tg-0lax">High</td>
+                                <td class="tg-0lax">Medium</td>
+                                <td class="tg-0lax">Medium</td>
+                                <td class="tg-0lax">Info</td>
+                                <td class="tg-0lax">Low</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <img id="ks-zone-status" src="../static/images/kaspersky.jpeg"> -->
+                </div>
+
+                <div class="content-card">
+                    <div class="database-match" style="font-weight: bold;">Database</div>
+                    <p id="db-result-text"></p>
                 </div>
             </div>
         </div>
-        <!-- <script src="../static/js/index.js"></script> -->
-        <script src="../static/js/test.js"></script>
-        <script src="../static/js/socketResult.js"></script>
+        <script src="../static/js/index.js"></script>
     </div>
 </body>
 

@@ -5,7 +5,6 @@ body {
     background-size: 1600px;
     background-position: center;
     color: rgb(168, 203, 252) !important; */
-
     background: url("https://media.istockphoto.com/id/1138740533/photo/dark-blue-defocused-blurred-motion-abstract-background.jpg?b=1&s=612x612&w=0&k=20&c=t3Fdmm2RlkqarOK4uzECZ2mfye72FSVXkvvNPp1kaYM=");
     background-size: 100%;
     background-position: center;
@@ -24,7 +23,11 @@ body {
     /* margin-top: auto; */
     margin-top: 0em;
     padding-top: none;
+}
 
+.row2-wrapper {
+    display: flex;
+    justify-content: space-around;
 }
 
 .row2 {
@@ -32,9 +35,10 @@ body {
     text-align: center;
     flex-wrap: wrap;
     padding: 2em 2em;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 0em;
     padding-top: 0em;
+    width: 99%;
 }
 
 h1 {
@@ -46,31 +50,28 @@ h1 {
 }
 
 .card {
-
     position: relative;
     width: 340px;
     height: 450px;
+    width: 19vw;
+    height: 58vh;
     background: #fff;
     overflow: hidden;
     border-radius: 10px;
     margin: 20px;
-
 }
 
 .card .circle {
-
     position: absolute;
     top: -190px;
     left: 50%;
     width: 500px;
     height: 500px;
     transform: translateX(-50%);
-
     clip-path: circle();
 }
 
 .card .circle::before {
-
     content: "";
     position: absolute;
     top: -8px;
@@ -93,7 +94,6 @@ h1 {
 }
 
 .imgBox img {
-
     position: absolute;
     top: 0;
     left: 0;
@@ -101,11 +101,9 @@ h1 {
     width: 100%;
     height: 100%;
     transition: all 0.5s;
-
 }
 
 .imgBox img {
-
     position: absolute;
     top: 0;
     left: 0;
@@ -113,38 +111,30 @@ h1 {
     width: 100%;
     height: 100%;
     transition: all 0.5s;
-
 }
 
 .imgBox img:hover {
-
     transform: scale(1.2);
-
 }
 
 .card .content {
-
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     height: 140px;
     padding: 20px 30px;
-
 }
 
 .content .fa-linkedin {
-
     padding: 2px 4px;
     color: #fff;
     background: #0077b5;
     border-radius: 2px;
     align-items: center;
-
 }
 
 .content h3 {
-
     text-align: center;
     font-size: 1.4em;
     color: #333;
@@ -153,23 +143,19 @@ h1 {
 }
 
 .content .textIcon {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
 }
 
 .content .textIcon h4 {
-
     text-align: center;
     color: #e91063;
     font-weight: 400;
 }
 
 .content .textIcon2 h5 {
-
     text-align: center;
     color: #e91063;
     font-weight: 400;

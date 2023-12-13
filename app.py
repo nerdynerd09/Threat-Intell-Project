@@ -12,6 +12,7 @@ from ipScripts.kasperskyip import kasperskyIP
 from fileScripts.kshashscan import kasperskyHash
 from ipScripts.kasperskyurl import kasperskyURL
 from ipScripts.honeydb import honeyDB
+from ipScripts.abuseIPDB import abuseIPDBFunc
 
 UPLOAD_FOLDER = 'Uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','zip','exe'}
@@ -29,7 +30,7 @@ socket = SocketIO(app)
 def index():
     result = latestIoC()
     # return render_template('home.html', result=result)
-    return render_template('test.html', result=result)
+    return render_template('home.html', result=result)
 
 @app.route("/about")
 def aboutPage():
@@ -102,11 +103,9 @@ def checkvturl():
     if request.method == 'GET':
         try:
             url = request.args.get('url')
-            print("VT URL: ",url)
         except Exception as e:
             print(e)
         result = checkURL(url)
-        print("URL: ",result)
         # print(type(result))
 
     socket.emit("checkvtip",{'vtResult':(result)})      
@@ -181,12 +180,10 @@ def checkvthash():
     if request.method == 'GET':
         try:
             hashValue = request.args.get('hashValue')
-            print("VT hashValue: ",hashValue)
         except Exception as e:
             print(e)
         result = VT_Request(hashValue)
-        print(result)        
-        fileScanResult(hashValue,{"vt":result})
+        fileScanResult(hashValue,{"vt":result["Status"]})
         # print(type(result))
 
     socket.emit("checkvthash",{'vtResult':(result)})      
@@ -214,6 +211,16 @@ def checkhoneydbip():
     socket.emit("checkhoneydbipresult", {'ipResult': result})
     return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
 
+@app.route('/abuseDBIP', methods=["GET"])
+def abuseDBIP():
+    result = None
+    if request.method == 'GET':
+        ipValue = request.args.get('ip')
+        result = abuseIPDBFunc(ipValue)
+        # print("Result from abuse ip db: ",result)
+    socket.emit("checkabusedbipresult", {'ipResult': result})
+    return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+
 
 @app.route('/checkkshash',methods=["GET"])
 def checkkshash():
@@ -221,15 +228,13 @@ def checkkshash():
     if request.method == 'GET':
         try:
             hashValue = request.args.get('hashValue')
-            print("KS hashValue: ",hashValue)
         except Exception as e:
             print(e)
         result = kasperskyHash(hashValue)
-        print(result)        
-        # fileScanResult(hashValue,{"ks":result['Zone']})
+        fileScanResult(hashValue,{"ks":result['Status']})
         # print(type(result))
 
-    socket.emit("checkkshash",{'ksResult':(result)})      
+    socket.emit("checkksipresult",{'ipResult':result})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
@@ -241,14 +246,12 @@ def checkksurl():
     if request.method == 'GET':
         try:
             url = request.args.get('url')
-            print("KS URL: ",url)
         except Exception as e:
             print(e)
         result = kasperskyURL(url)
-        print("URL: ",result)
         # print(type(result))
 
-    socket.emit("checkksurlresult",{'ksResult':(result)})      
+    socket.emit("checkksipresult",{'ipResult':result})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,

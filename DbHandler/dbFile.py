@@ -30,9 +30,9 @@ def dbHashStore(resultList,pageNumber):
 
 def dbHashSearch(hashValue):
     if mycol.find_one({"hash":hashValue}) is None:
-        return "Non-malicious hash"
+        return "Safe"
     else:
-        return "Malicious hash"
+        return "Malicious"
 
 
 def dbSearch(target):
@@ -43,9 +43,9 @@ def dbSearch(target):
 
 def dbURLSearch(target):
     if mycol.find_one({"url":target}) is None:
-        return "Non-malicious URL"
+        return "Safe"
     else:
-        return "Malicious URL"
+        return "Malicious"
 
 # dbAtlas()
 
@@ -56,7 +56,6 @@ def fileScanResult(hashValue,result):
     if fileHashCol.find_one({"hash":hashValue}):
         resultDict = fileHashCol.find_one({"hash":hashValue})["result"]
         resultDict[list(result.keys())[0]] = list(result.values())[0]
-        print(resultDict)
 
         fileHashCol.update_one({"hash":hashValue},{"$set":{"result":resultDict}})
     else:
