@@ -40,12 +40,27 @@ def dbSearch(target):
         return "Non-malicious IP"
     else:
         return "Malicious IP"
-
+    
 def dbURLSearch(target):
     if mycol.find_one({"url":target}) is None:
         return "Safe"
     else:
         return "Malicious"
+    
+def countIPAddresses(): #to count total number of IPs stored in the database
+    count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})
+    print(f"Number of IP addresses in the database: {count_totalIpAddresses}")
+    return count_totalIpAddresses
+
+def counthashValues(): #to count total number of hashvalues stored in the database
+    count_totalhashValues = mycol.count_documents({"hash": {"$exists": True}})
+    print(f"Number of hash values in the database: {count_totalhashValues}")
+    return count_totalhashValues
+
+def countUrls(): #to count total number of urls stored in the database
+    count_totalUrls = mycol.count_documents({"url": {"$exists": True}})
+    print(f"Number of urls in the database: {count_totalUrls}")
+    return count_totalUrls
 
 # dbAtlas()
 
@@ -61,3 +76,7 @@ def fileScanResult(hashValue,result):
     else:
         fileHashCol.insert_one({"hash":hashValue,"result":result})
 
+
+countIPAddresses()
+counthashValues()
+countUrls()
