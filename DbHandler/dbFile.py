@@ -9,7 +9,7 @@ uri = "mongodb+srv://viaathreatintel:rrDsKYeblTyDitLK@cluster0.mckr9yr.mongodb.n
 myclient = pymongo.MongoClient(uri)
 mydb = myclient["iitk"]
 mycol = mydb["threatintell"]
-
+mycol1 = mydb["CountofSearches"]
 
 def dbAtlas():
     print((mycol.count_documents({})))
@@ -34,12 +34,18 @@ def dbHashSearch(hashValue):
     else:
         return "Malicious"
 
-
 def dbSearch(target):
     if mycol.find_one({"ip":target}) is None:
         return "Non-malicious IP"
     else:
         return "Malicious IP"
+    
+def SearchIPCount(): #to store the count of total IP Searches in the Database and retrieving the same.
+    result = mycol1.find_one({})
+    mycol1.update_one({}, {"$inc": {"ipsearchcount": 1}}, upsert=True)
+    searchedIP = result.get("ipsearchcount", 0)
+    #print(f"Number of IP Searches: {searchedIP}")
+    return searchedIP
     
 def dbURLSearch(target):
     if mycol.find_one({"url":target}) is None:
@@ -47,17 +53,24 @@ def dbURLSearch(target):
     else:
         return "Malicious"
     
-def countIPAddresses(): #to count total number of IPs stored in the database
+def SearchURLCount(): #to store the count of total URL Searches in the Database and retrieving the same.
+    result = mycol1.find_one({})
+    mycol1.update_one({}, {"$inc": {"urlsearchcount": 1}}, upsert=True)
+    searchedURL = result.get("urlsearchcount", 0)
+    #print(f"Number of IP Searches: {searchedURL}")
+    return searchedURL
+    
+def countdbIPAddresses(): #to count total number of IPs stored in the database
     count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})
     print(f"Number of IP addresses in the database: {count_totalIpAddresses}")
     return count_totalIpAddresses
 
-def counthashValues(): #to count total number of hashvalues stored in the database
+def countdbhashValues(): #to count total number of hashvalues stored in the database
     count_totalhashValues = mycol.count_documents({"hash": {"$exists": True}})
     print(f"Number of hash values in the database: {count_totalhashValues}")
     return count_totalhashValues
 
-def countUrls(): #to count total number of urls stored in the database
+def countdbUrls(): #to count total number of urls stored in the database
     count_totalUrls = mycol.count_documents({"url": {"$exists": True}})
     print(f"Number of urls in the database: {count_totalUrls}")
     return count_totalUrls
@@ -77,6 +90,6 @@ def fileScanResult(hashValue,result):
         fileHashCol.insert_one({"hash":hashValue,"result":result})
 
 
-countIPAddresses()
-counthashValues()
-countUrls()
+countdbIPAddresses()
+countdbhashValues()
+countdbUrls()

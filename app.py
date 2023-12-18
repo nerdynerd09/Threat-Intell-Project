@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -46,6 +46,7 @@ def contactPage():
 
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
+    SearchIPCount()
     result = None
     if request.method == 'GET':
 
@@ -54,12 +55,13 @@ def checkentitiy():
         # print(ip)
         result = dbSearch(ip)
         # print(result)
-
+    
     socket.emit("checkentity",{'dbResult':result})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
                     data = result), 200
+    
 
 @app.route('/checkvtip',methods=["GET"])
 def checkvtip():
@@ -82,6 +84,7 @@ def checkvtip():
 
 @app.route('/checkurl',methods=["GET"])
 def checkurl():
+    SearchURLCount()
     result = None
     if request.method == 'GET':
 
@@ -165,6 +168,7 @@ def fileCheck():
 #  for url 
 @app.route('/checkurlentity', methods=["GET"])
 def checkurlentity():
+    SearchURLCount()
     result = None
     if request.method == 'GET':
         url = request.args.get('url')
