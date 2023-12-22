@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount,SearchFileCount
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -31,9 +31,8 @@ def index():
     result = latestIoC()
     searchIPCount = SearchIPCount(0)
     searchURLCount = SearchURLCount(0)
-    searchFileCount = SearchFileCount(0)
     # return render_template('home.html', result=result)
-    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount,searchFileCount=searchFileCount)
+    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount)
 
 @app.route("/about")
 def aboutPage():
@@ -160,9 +159,8 @@ def fileCheck():
     result = dbHashSearch(fileHashValue)
     
     fileScanResult(fileHashValue,{"db":result})
-    checkCount = SearchFileCount(1)
     
-    socket.emit("checkHashValue",{'dbResult':result,'checkCount':checkCount})      
+    socket.emit("checkHashValue",{'dbResult':result})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,

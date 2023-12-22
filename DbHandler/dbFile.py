@@ -60,11 +60,6 @@ def SearchURLCount(incrementStatus): #to store the count of total URL Searches i
     #print(f"Number of IP Searches: {searchedURL}")
     return searchedURL
 
-def SearchFileCount(incrementStatus):
-    mycol1.update_one({}, {"$inc": {"filesearchcount": incrementStatus}}, upsert=True)
-    result = mycol1.find_one({})
-    searchedFile = result.get("filesearchcount", 0)
-    return searchedFile
 
 def countdbIPAddresses(): #to count total number of IPs stored in the database
     count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})

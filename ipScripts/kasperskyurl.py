@@ -11,11 +11,11 @@ import json
 
 def kasperskyURL(urlValue):
 
-    # if "://" in urlValue:
-    #     urlValue  = urlValue.split("://")[1]
-    #     print(urlValue)
-    # else:
-    #     urlValue = urlValue
+    if "://" in urlValue:
+        urlValue  = urlValue.split("://")[1]
+        print(urlValue)
+    else:
+        urlValue = urlValue
 
     resultDict = {}
     headers = {
@@ -24,7 +24,7 @@ def kasperskyURL(urlValue):
 
     response = requests.get(f'https://opentip.kaspersky.com/api/v1/search/domain?request={urlValue}', headers=headers)
     json_response=json.loads(response.text)
-    print(json_response)
+    # print(json_response)
 
     url_zone=json_response['Zone']
     # print('Zone: '+ url_zone)
