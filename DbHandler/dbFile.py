@@ -39,27 +39,33 @@ def dbSearch(target):
         return "Non-malicious IP"
     else:
         return "Malicious IP"
-    
-def SearchIPCount(): #to store the count of total IP Searches in the Database and retrieving the same.
-    result = mycol1.find_one({})
-    mycol1.update_one({}, {"$inc": {"ipsearchcount": 1}}, upsert=True)
-    searchedIP = result.get("ipsearchcount", 0)
-    #print(f"Number of IP Searches: {searchedIP}")
-    return searchedIP
-    
+ 
 def dbURLSearch(target):
     if mycol.find_one({"url":target}) is None:
         return "Safe"
     else:
         return "Malicious"
-    
-def SearchURLCount(): #to store the count of total URL Searches in the Database and retrieving the same.
+
+def SearchIPCount(incrementStatus): #to store the count of total IP Searches in the Database and retrieving the same.
+    mycol1.update_one({}, {"$inc": {"ipsearchcount": incrementStatus}}, upsert=True)
     result = mycol1.find_one({})
-    mycol1.update_one({}, {"$inc": {"urlsearchcount": 1}}, upsert=True)
+    searchedIP = result.get("ipsearchcount", 0)
+    #print(f"Number of IP Searches: {searchedIP}")
+    return searchedIP
+
+def SearchURLCount(incrementStatus): #to store the count of total URL Searches in the Database and retrieving the same.
+    mycol1.update_one({}, {"$inc": {"urlsearchcount": incrementStatus}}, upsert=True)
+    result = mycol1.find_one({})
     searchedURL = result.get("urlsearchcount", 0)
     #print(f"Number of IP Searches: {searchedURL}")
     return searchedURL
-    
+
+def SearchFileCount(incrementStatus):
+    mycol1.update_one({}, {"$inc": {"filesearchcount": incrementStatus}}, upsert=True)
+    result = mycol1.find_one({})
+    searchedFile = result.get("filesearchcount", 0)
+    return searchedFile
+
 def countdbIPAddresses(): #to count total number of IPs stored in the database
     count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})
     print(f"Number of IP addresses in the database: {count_totalIpAddresses}")
@@ -90,6 +96,8 @@ def fileScanResult(hashValue,result):
         fileHashCol.insert_one({"hash":hashValue,"result":result})
 
 
-countdbIPAddresses()
-countdbhashValues()
-countdbUrls()
+# countdbIPAddresses()
+# countdbhashValues()
+# countdbUrls()
+# SearchIPCount()
+# SearchURLCount()

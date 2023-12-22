@@ -25,15 +25,33 @@
     </nav>
 
     <div class="outer-body-wrapper">
-        <div class="threat-news-wrapper">
-            <ul>
+        <div class="side-content-wrapper">
+            <div class="search-count">
+                <ul>
+                    <li>
+                        <p>Searched IPs</p>
+                        <p id="searchIPCount">{{searchIPCount}}</p>
+                    </li>
+                    <li>
+                        <p>Searched URLs</p>
+                        <p id="searchURLCount">{{searchURLCount}}</p>
+                    </li>
+                    <li>
+                        <p>Searched Files</p>
+                        <p id="searchFileCount">{{searchFileCount}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="threat-news-wrapper">
+                <ul>
 
-                {% for index in (result) %}
-                <li>
-                    <a target="_blank" href="{{index[1]}}">{{index[0]}}</a>
-                </li>
-                {% endfor %}
-            </ul>
+                    {% for index in (result) %}
+                    <li>
+                        <a target="_blank" href="{{index[1]}}">{{index[0]}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="inner-body-wrapper">
             <div class="body-wrapper">
@@ -133,6 +151,7 @@
         <script src="../static/js/index.js"></script>
         <!-- <script src="../static/js/test.js"></script> -->
         <script src="../static/js/socketResult.js"></script>
+
     </div>
 </body>
 

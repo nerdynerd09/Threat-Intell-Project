@@ -5,9 +5,18 @@ socket.on('connect', function() {
 
 socket.on('checkentity', function(data) {
     const result = data['dbResult'];
+    const checkCount = data['checkCount'];
+    const countType = data['countType'];
 
     document.getElementById("result-ul-list").innerHTML += `<li><p>Database</p><p>${result}</p></li>`;
 
+    if (countType === 'ip') {
+        document.getElementById("searchIPCount").innerText = checkCount
+    } else if (countType === 'url') {
+        console.log(countType)
+        console.log(checkCount)
+        document.getElementById("searchURLCount").innerText = checkCount
+    }
 })
 
 socket.on('checkvtip', function(data) {
@@ -70,7 +79,7 @@ socket.on('checkkshash', function(data) {
 
 socket.on('checkHashValue', function(data) {
     const result = data['dbResult'];
-
+    const checkCount = data['checkCount'];
     document.getElementById("result-ul-list").innerHTML += `<li><p>Database</p><p>${result}</p></li>`;
-
+    document.getElementById("searchFileCount").innerText = checkCount
 })

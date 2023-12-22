@@ -49,11 +49,11 @@ def checkURL(targetUrl):
     }
 
     response = requests.post(url, data=payload, headers=headers)
-    # print(response.text)
         
     json_response = response.json()
 
     response2 = requests.get(json_response["data"]["links"]["self"],headers=headers)
+    # print(response2.text)
     if(response2.json()["data"]["attributes"]["stats"]["malicious"])>0:
         return "Malicious"
     else:
@@ -63,4 +63,4 @@ def checkURL(targetUrl):
 # checkURL("https://evil.com/")
 # checkURL("https://term.m4tt72.com/")
 # checkURL("https://google.com/")
-
+checkURL("http://alisary.com/public/7dfpJgWlTDiYDuG8TFycnp9AdhqBNvot")

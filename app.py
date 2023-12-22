@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount,SearchFileCount
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -29,8 +29,11 @@ socket = SocketIO(app)
 # def threat_intel():
 def index():
     result = latestIoC()
+    searchIPCount = SearchIPCount(0)
+    searchURLCount = SearchURLCount(0)
+    searchFileCount = SearchFileCount(0)
     # return render_template('home.html', result=result)
-    return render_template('home.html', result=result)
+    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount,searchFileCount=searchFileCount)
 
 @app.route("/about")
 def aboutPage():
@@ -46,7 +49,6 @@ def contactPage():
 
 @app.route('/checkentity',methods=["GET"])
 def checkentitiy():
-    SearchIPCount()
     result = None
     if request.method == 'GET':
 
@@ -55,8 +57,9 @@ def checkentitiy():
         # print(ip)
         result = dbSearch(ip)
         # print(result)
+        checkCount = SearchIPCount(1)
     
-    socket.emit("checkentity",{'dbResult':result})      
+    socket.emit("checkentity",{'dbResult':result,'checkCount':checkCount,'countType':'ip'})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
@@ -84,7 +87,6 @@ def checkvtip():
 
 @app.route('/checkurl',methods=["GET"])
 def checkurl():
-    SearchURLCount()
     result = None
     if request.method == 'GET':
 
@@ -92,9 +94,11 @@ def checkurl():
         url = request.args.get('url')
         # print(ip)
         result = dbURLSearch(url)
+        checkCount = SearchURLCount(1)
+
         # print(result)
 
-    socket.emit("checkentity",{'dbResult':result})      
+    socket.emit("checkentity",{'dbResult':result,"checkCount":checkCount,'countType':'url'})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
@@ -154,10 +158,11 @@ def fileCheck():
     requests.get(f"http://127.0.0.1:5000/checkvthash?hashValue={fileHashValue}")
     requests.get(f"http://127.0.0.1:5000/checkkshash?hashValue={fileHashValue}")
     result = dbHashSearch(fileHashValue)
-
+    
     fileScanResult(fileHashValue,{"db":result})
-
-    socket.emit("checkHashValue",{'dbResult':result})      
+    checkCount = SearchFileCount(1)
+    
+    socket.emit("checkHashValue",{'dbResult':result,'checkCount':checkCount})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
