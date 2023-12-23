@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount,countdbhashValues,countdbIPAddresses,countdbUrls
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -31,8 +31,14 @@ def index():
     result = latestIoC()
     searchIPCount = SearchIPCount(0)
     searchURLCount = SearchURLCount(0)
+
+    countDbUrls = countdbUrls()
+    countdbIpAddresses = countdbIPAddresses()
+    countdbHashhValues = countdbhashValues()
     # return render_template('home.html', result=result)
-    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount)
+    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount,\
+                            countdbhashValues=countdbHashhValues,countdbIPAddresses=countdbIpAddresses,\
+                            countdbUrls=countDbUrls)
 
 @app.route("/about")
 def aboutPage():

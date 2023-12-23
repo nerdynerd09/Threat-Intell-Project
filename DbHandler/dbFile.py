@@ -63,17 +63,17 @@ def SearchURLCount(incrementStatus): #to store the count of total URL Searches i
 
 def countdbIPAddresses(): #to count total number of IPs stored in the database
     count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})
-    print(f"Number of IP addresses in the database: {count_totalIpAddresses}")
+    # print(f"Number of IP addresses in the database: {count_totalIpAddresses}")
     return count_totalIpAddresses
 
 def countdbhashValues(): #to count total number of hashvalues stored in the database
     count_totalhashValues = mycol.count_documents({"hash": {"$exists": True}})
-    print(f"Number of hash values in the database: {count_totalhashValues}")
+    # print(f"Number of hash values in the database: {count_totalhashValues}")
     return count_totalhashValues
 
 def countdbUrls(): #to count total number of urls stored in the database
     count_totalUrls = mycol.count_documents({"url": {"$exists": True}})
-    print(f"Number of urls in the database: {count_totalUrls}")
+    # print(f"Number of urls in the database: {count_totalUrls}")
     return count_totalUrls
 
 # dbAtlas()

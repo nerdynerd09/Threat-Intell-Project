@@ -170,12 +170,14 @@ body {
     margin-right: 2vw;
     border-radius: 8px;
     display: flex;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
 }
 
 .search-count ul {
     width: 95%;
     margin: auto auto;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 .search-count li {
@@ -192,7 +194,7 @@ body {
     justify-content: space-between;
 }
 
-.search-count ul::-webkit-scrollbar {
+.search-count::-webkit-scrollbar {
     visibility: hidden;
 }
 
