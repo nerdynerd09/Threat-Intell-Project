@@ -1,6 +1,6 @@
 import os,json,requests
 from flask import Flask, render_template, request, jsonify
-from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount,countdbhashValues,countdbIPAddresses,countdbUrls
+from DbHandler.dbFile import dbSearch,dbHashSearch,fileScanResult,dbURLSearch,SearchIPCount,SearchURLCount,countdbhashValues,countdbIPAddresses,countdbUrls,UploadFileCount
 from flask_socketio import SocketIO
 import initialSetup
 from fileScripts.hashgenerator import hash_file
@@ -31,12 +31,13 @@ def index():
     result = latestIoC()
     searchIPCount = SearchIPCount(0)
     searchURLCount = SearchURLCount(0)
+    uploadedfileCount = UploadFileCount(0)
 
     countDbUrls = countdbUrls()
     countdbIpAddresses = countdbIPAddresses()
     countdbHashhValues = countdbhashValues()
     # return render_template('home.html', result=result)
-    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount,\
+    return render_template('home.html', result=result,searchIPCount=searchIPCount,searchURLCount=searchURLCount,uploadedfileCount=uploadedfileCount,\
                             countdbhashValues=countdbHashhValues,countdbIPAddresses=countdbIpAddresses,\
                             countdbUrls=countDbUrls)
 
@@ -159,14 +160,17 @@ def fileCheck():
     print(filePath)
     fileHashValue = hash_file(filePath)
     print("Hash: ",fileHashValue)
+    
 
     requests.get(f"http://127.0.0.1:5000/checkvthash?hashValue={fileHashValue}")
     requests.get(f"http://127.0.0.1:5000/checkkshash?hashValue={fileHashValue}")
     result = dbHashSearch(fileHashValue)
+
+    
     
     fileScanResult(fileHashValue,{"db":result})
-    
-    socket.emit("checkHashValue",{'dbResult':result})      
+    checkCount = UploadFileCount(1)
+    socket.emit("checkHashValue",{'dbResult':result, 'checkCount':checkCount,'countType':'fileName'})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
@@ -177,7 +181,6 @@ def fileCheck():
 #  for url 
 @app.route('/checkurlentity', methods=["GET"])
 def checkurlentity():
-    SearchURLCount()
     result = None
     if request.method == 'GET':
         url = request.args.get('url')

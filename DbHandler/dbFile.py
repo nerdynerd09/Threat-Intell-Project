@@ -57,9 +57,15 @@ def SearchURLCount(incrementStatus): #to store the count of total URL Searches i
     mycol1.update_one({}, {"$inc": {"urlsearchcount": incrementStatus}}, upsert=True)
     result = mycol1.find_one({})
     searchedURL = result.get("urlsearchcount", 0)
-    #print(f"Number of IP Searches: {searchedURL}")
+    #print(f"Number of URL Searches: {searchedURL}")
     return searchedURL
 
+def UploadFileCount(incrementStatus): #to store the count of total file uploads in the Database and retrieving the same.
+    mycol1.update_one({}, {"$inc": {"filesearchcount": incrementStatus}}, upsert=True)
+    result = mycol1.find_one({})
+    uploadedfile = result.get("filesearchcount", 0)
+    #print(f"Number of File Uploads: {uploadedfile}")
+    return uploadedfile
 
 def countdbIPAddresses(): #to count total number of IPs stored in the database
     count_totalIpAddresses = mycol.count_documents({"ip": {"$exists": True}})
