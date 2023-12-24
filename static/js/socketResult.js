@@ -79,7 +79,7 @@ socket.on('checkkshash', function(data) {
 
 socket.on('checkHashValue', function(data) {
     const result = data['dbResult'];
-    // const checkCount = data['checkCount'];
+    const checkCount = data['checkCount'];
     document.getElementById("result-ul-list").innerHTML += `<li><p>Database</p><p>${result}</p></li>`;
-    // document.getElementById("searchFileCount").innerText = checkCount
+    document.getElementById("searchFileCount").innerText = checkCount
 })

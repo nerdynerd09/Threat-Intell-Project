@@ -165,11 +165,9 @@ def fileCheck():
     requests.get(f"http://127.0.0.1:5000/checkvthash?hashValue={fileHashValue}")
     requests.get(f"http://127.0.0.1:5000/checkkshash?hashValue={fileHashValue}")
     result = dbHashSearch(fileHashValue)
-
-    
-    
-    fileScanResult(fileHashValue,{"db":result})
     checkCount = UploadFileCount(1)
+    fileScanResult(fileHashValue,{"db":result})
+    
     socket.emit("checkHashValue",{'dbResult':result, 'checkCount':checkCount,'countType':'fileName'})      
     return jsonify(isError = False,
                     message = "Success",

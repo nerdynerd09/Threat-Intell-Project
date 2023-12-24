@@ -63,4 +63,4 @@ def checkURL(targetUrl):
 # checkURL("https://evil.com/")
 # checkURL("https://term.m4tt72.com/")
 # checkURL("https://google.com/")
-checkURL("http://alisary.com/public/7dfpJgWlTDiYDuG8TFycnp9AdhqBNvot")
+# checkURL("http://alisary.com/public/7dfpJgWlTDiYDuG8TFycnp9AdhqBNvot")
