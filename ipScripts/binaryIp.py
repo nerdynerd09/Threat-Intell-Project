@@ -21,4 +21,4 @@ def binaryIPCollector():
     dbIPStore(resultList=resultList)
     print("Done")
 
-binaryIPCollector()
+# binaryIPCollector()
