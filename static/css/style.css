@@ -516,3 +516,39 @@ body {
     text-align: center;
     vertical-align: top
 }
+
+.error-modal {
+    width: 22vw;
+    height: 5vh;
+    position: absolute;
+    bottom: 5vh;
+    background-color: wheat;
+    border-radius: 8px;
+    animation: slideIn 0.5s forwards;
+    display: none;
+    /* display: flex; */
+    align-items: center;
+    padding-left: 1vw;
+}
+
+@keyframes slideIn {
+    0% {
+        margin-left: -30vw;
+        /* Start off-screen */
+    }
+    100% {
+        margin-left: 1vw;
+        /* Slide to the desired position */
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        margin-left: 1vw;
+        /* Start from the right side */
+    }
+    100% {
+        margin-left: -30vw;
+        /* Move to the left side */
+    }
+}

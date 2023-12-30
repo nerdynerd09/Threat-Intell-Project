@@ -83,3 +83,17 @@ socket.on('checkHashValue', function(data) {
     document.getElementById("result-ul-list").innerHTML += `<li><p>Database</p><p>${result}</p></li>`;
     document.getElementById("searchFileCount").innerText = checkCount
 })
+
+socket.on('errormsg', function(data) {
+    const result = data['errorMsg'];
+    console.log(result)
+
+    const element = document.getElementById("error-modal");
+    element.style.display = "flex"
+    element.innerHTML = result
+    setTimeout(() => {
+        element.style.animation = ''
+        element.style.animation = 'slideOut 2s forwards'
+    }, 5000)
+
+})

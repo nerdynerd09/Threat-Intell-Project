@@ -60,17 +60,23 @@ def checkentitiy():
 
         # ip = request.form.get('q')
         ip = request.args.get('ip')
+        if len(ip)<=10:
         # print(ip)
-        result = dbSearch(ip)
-        # print(result)
-        checkCount = SearchIPCount(1)
-    
-    socket.emit("checkentity",{'dbResult':result,'checkCount':checkCount,'countType':'ip'})      
-    return jsonify(isError = False,
-                    message = "Success",
-                    statusCode = 200,
-                    data = result), 200
-    
+            result = dbSearch(ip)
+            # print(result)
+            checkCount = SearchIPCount(1)
+        
+            socket.emit("checkentity",{'dbResult':result,'checkCount':checkCount,'countType':'ip'})      
+            return jsonify(isError = False,
+                            message = "Success",
+                            statusCode = 200,
+                            data = result), 200
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+            return jsonify(isError = False,
+                            message = "Success",
+                            statusCode = 200,
+                            data = result), 200
 
 @app.route('/checkvtip',methods=["GET"])
 def checkvtip():
@@ -78,18 +84,28 @@ def checkvtip():
     if request.method == 'GET':
         try:
             ip = request.args.get('ip')
+            if len(ip) <=10:
+    
+                result = checkIP(ip)
+                socket.emit("checkvtip",{'vtResult':(result)})      
+                return jsonify(isError = False,
+                                message = "Success",
+                                statusCode = 200,
+                                data = result), 200
+            else:
+                socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+                return jsonify(isError = False,
+                            message = "Success",
+                            statusCode = 200,
+                            data = result), 200 
             # print("VT IP: ",ip)
         except Exception as e:
             print(e)
-        result = checkIP(ip)
+        # result = checkIP(ip)
         # print(result)        
         # print(type(result))
 
-    socket.emit("checkvtip",{'vtResult':(result)})      
-    return jsonify(isError = False,
-                    message = "Success",
-                    statusCode = 200,
-                    data = result), 200
+    
 
 @app.route('/checkurl',methods=["GET"])
 def checkurl():
@@ -98,34 +114,50 @@ def checkurl():
 
         # ip = request.form.get('q')
         url = request.args.get('url')
+        if len(url) <=50:
         # print(ip)
-        result = dbURLSearch(url)
-        checkCount = SearchURLCount(1)
+            result = dbURLSearch(url)
+            checkCount = SearchURLCount(1)
 
         # print(result)
 
-    socket.emit("checkentity",{'dbResult':result,"checkCount":checkCount,'countType':'url'})      
-    return jsonify(isError = False,
-                    message = "Success",
-                    statusCode = 200,
-                    data = result), 200
-    
+            socket.emit("checkentity",{'dbResult':result,"checkCount":checkCount,'countType':'url'})      
+            return jsonify(isError = False,
+                            message = "Success",
+                            statusCode = 200,
+                            data = result), 200
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+            return jsonify(isError = False,
+                        message = "Success",
+                        statusCode = 200,
+                        data = result), 200 
+
+
 @app.route('/checkvturl',methods=["GET"])
 def checkvturl():
     result = None
     if request.method == 'GET':
         try:
             url = request.args.get('url')
+            if len(url) <=50:
+                result = checkURL(url)
+                socket.emit("checkvtip",{'vtResult':(result)})      
+                return jsonify(isError = False,
+                                message = "Success",
+                                statusCode = 200,
+                                data = result), 200
+            else:
+                socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+                return jsonify(isError = False,
+                            message = "Success",
+                            statusCode = 200,
+                            data = result), 200 
         except Exception as e:
             print(e)
-        result = checkURL(url)
         # print(type(result))
 
-    socket.emit("checkvtip",{'vtResult':(result)})      
-    return jsonify(isError = False,
-                    message = "Success",
-                    statusCode = 200,
-                    data = result), 200
+    
 
     # return render_template('home.html',result=result)
 
@@ -182,11 +214,16 @@ def checkurlentity():
     result = None
     if request.method == 'GET':
         url = request.args.get('url')
-        result = checkURL(url)
-
-    socket.emit("checkurlentity", {'urlResult': result})
-    return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
-
+        if len(url)<=50:
+            result = checkURL(url)
+            socket.emit("checkurlentity", {'urlResult': result})
+            return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+            return jsonify(isError = False,
+                        message = "Success",
+                        statusCode = 200,
+                        data = result), 200 
 
 @app.route('/checkvthash',methods=["GET"])
 def checkvthash():
@@ -211,18 +248,30 @@ def checkksip():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        result = kasperskyIP(ipValue)
-    socket.emit("checkksipresult", {'ipResult': result})
-    return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+        if len(ipValue)<=10:
+            result = kasperskyIP(ipValue)
+            socket.emit("checkksipresult", {'ipResult': result})
+            return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+            return jsonify(isError = False,
+                        message = "Success",
+                        statusCode = 200,
+                        data = result), 200 
 
+    
 @app.route('/honeyDBIP', methods=["GET"])
 def checkhoneydbip():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        result = honeyDB(ipValue)
-        # print("Result from HoneyDB: ",result)
-    socket.emit("checkhoneydbipresult", {'ipResult': result})
+        if len(ipValue)<=10:
+            result = honeyDB(ipValue)
+            # print("Result from HoneyDB: ",result)
+            socket.emit("checkhoneydbipresult", {'ipResult': result})
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+
     return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
 
 @app.route('/abuseDBIP', methods=["GET"])
@@ -230,9 +279,12 @@ def abuseDBIP():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        result = abuseIPDBFunc(ipValue)
+        if len(ipValue)<=10:
+            result = abuseIPDBFunc(ipValue)
         # print("Result from abuse ip db: ",result)
-    socket.emit("checkabusedbipresult", {'ipResult': result})
+            socket.emit("checkabusedbipresult", {'ipResult': result})
+        else:
+            socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
     return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
 
 
@@ -260,12 +312,16 @@ def checkksurl():
     if request.method == 'GET':
         try:
             url = request.args.get('url')
+            if len(url)<=50:
+                result = kasperskyURL(url)
+                socket.emit("checkksipresult",{'ipResult':result})      
+            else:
+                socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
+
         except Exception as e:
             print(e)
-        result = kasperskyURL(url)
         # print(type(result))
 
-    socket.emit("checkksipresult",{'ipResult':result})      
     return jsonify(isError = False,
                     message = "Success",
                     statusCode = 200,
