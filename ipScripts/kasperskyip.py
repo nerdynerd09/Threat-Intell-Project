@@ -1,22 +1,20 @@
 import requests
 import json
-
-# 51.38.81.65 --red zone (dangerous)
-# 95.156.121.11 --green zone (safe)
-# 2.179.195.10 -- orange zone (not trusted)
-# 223.8.213.228--Grey zone (not listed yet)
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def kasperskyIP(ipValue):
-    resultList = []
     resultDict = {}
+
     headers = {
-        'x-api-key': 'VraH95OsSSijV58XbPaAvA==',
+        'x-api-key': f'{os.getenv("KASPERSKY_API_TOKEN")}',
     }
 
     response = requests.get(f'https://opentip.kaspersky.com/api/v1/search/ip?request={ipValue}', headers=headers)
     json_response=json.loads(response.text)
     
-
+    print(response.text)
     if json_response["Zone"] == "Red" or json_response["Zone"]=="Orange" or json_response["Zone"]=="Yellow":
         try:
             categories_with_zone = (json_response['IpGeneralInfo']['CategoriesWithZone'])
@@ -36,6 +34,4 @@ def kasperskyIP(ipValue):
     print(resultDict)
     return resultDict
 
-# kasperskyIP("51.38.81.65")
 # kasperskyIP("95.156.121.11")
-# kasperskyIP("223.8.213.228")

@@ -1,13 +1,16 @@
-import pymongo
+import pymongo,os
 import dns.resolver
 dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers=['8.8.8.8'] 
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-uri = "mongodb+srv://viaathreatintel:rrDsKYeblTyDitLK@cluster0.mckr9yr.mongodb.net/?retryWrites=true&w=majority"
+uri = f"mongodb+srv://viaathreatintel:{os.getenv('MONGODB')}@cluster0.mckr9yr.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
 myclient = pymongo.MongoClient(uri)
-mydb = myclient["iitk"]
+mydb = myclient["iitk"] 
 mycol = mydb["threatintell"]
 mycol1 = mydb["CountofSearches"]
 

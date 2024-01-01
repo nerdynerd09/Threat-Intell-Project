@@ -23,8 +23,6 @@ app.config['SECRET_KEY'] = "BROWNRING"
 socket = SocketIO(app)
 
 
-
-
 @app.route('/', methods=['GET', 'POST'])
 # def threat_intel():
 def index():
@@ -60,7 +58,7 @@ def checkentitiy():
 
         # ip = request.form.get('q')
         ip = request.args.get('ip')
-        if len(ip)<=10:
+        if len(ip)<=20:
         # print(ip)
             result = dbSearch(ip)
             # print(result)
@@ -84,7 +82,7 @@ def checkvtip():
     if request.method == 'GET':
         try:
             ip = request.args.get('ip')
-            if len(ip) <=10:
+            if len(ip)<=20:
     
                 result = checkIP(ip)
                 socket.emit("checkvtip",{'vtResult':(result)})      
@@ -98,12 +96,9 @@ def checkvtip():
                             message = "Success",
                             statusCode = 200,
                             data = result), 200 
-            # print("VT IP: ",ip)
         except Exception as e:
             print(e)
-        # result = checkIP(ip)
-        # print(result)        
-        # print(type(result))
+
 
     
 
@@ -112,14 +107,11 @@ def checkurl():
     result = None
     if request.method == 'GET':
 
-        # ip = request.form.get('q')
         url = request.args.get('url')
         if len(url) <=50:
         # print(ip)
             result = dbURLSearch(url)
             checkCount = SearchURLCount(1)
-
-        # print(result)
 
             socket.emit("checkentity",{'dbResult':result,"checkCount":checkCount,'countType':'url'})      
             return jsonify(isError = False,
@@ -155,11 +147,7 @@ def checkvturl():
                             data = result), 200 
         except Exception as e:
             print(e)
-        # print(type(result))
 
-    
-
-    # return render_template('home.html',result=result)
 
 @app.route('/fileUpload',methods=["GET","POST"])
 def fileUpload():
@@ -248,7 +236,7 @@ def checkksip():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        if len(ipValue)<=10:
+        if len(ipValue)<=20:
             result = kasperskyIP(ipValue)
             socket.emit("checkksipresult", {'ipResult': result})
             return jsonify(isError=False, message="Success", statusCode=200, data=result), 200
@@ -265,9 +253,8 @@ def checkhoneydbip():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        if len(ipValue)<=10:
+        if len(ipValue)<=20:
             result = honeyDB(ipValue)
-            # print("Result from HoneyDB: ",result)
             socket.emit("checkhoneydbipresult", {'ipResult': result})
         else:
             socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
@@ -279,9 +266,8 @@ def abuseDBIP():
     result = None
     if request.method == 'GET':
         ipValue = request.args.get('ip')
-        if len(ipValue)<=10:
+        if len(ipValue)<=20:
             result = abuseIPDBFunc(ipValue)
-        # print("Result from abuse ip db: ",result)
             socket.emit("checkabusedbipresult", {'ipResult': result})
         else:
             socket.emit("errormsg",{'errorMsg':"Length exceeded."})      
@@ -298,7 +284,6 @@ def checkkshash():
             print(e)
         result = kasperskyHash(hashValue)
         fileScanResult(hashValue,{"ks":result['Status']})
-        # print(type(result))
 
     socket.emit("checkksipresult",{'ipResult':result})      
     return jsonify(isError = False,
@@ -320,7 +305,6 @@ def checkksurl():
 
         except Exception as e:
             print(e)
-        # print(type(result))
 
     return jsonify(isError = False,
                     message = "Success",
@@ -328,5 +312,5 @@ def checkksurl():
                     data = result), 200
 
 if __name__ == "__main__":
-    socket.run(app,debug=True)
+    socket.run(app,debug=False,host="0.0.0.0")
     # app.run(debug=True)

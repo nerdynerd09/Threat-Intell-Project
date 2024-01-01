@@ -1,29 +1,23 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def abuseIPDBFunc(ipValue):
-    # Defining the api-endpoint
     url = 'https://api.abuseipdb.com/api/v2/check'
 
     querystring = {
-        # 'ipAddress': '118.25.6.39',
         'ipAddress': ipValue,
         'maxAgeInDays': '90'
     }
 
     headers = {
         'Accept': 'application/json',
-        'Key': '6b7c386dd3f6274c74c8b30f19900199b8a5b8b62651ec13d55ade05c456c5d9c1f6c7b23b8dfb06'
+        'Key': f'{os.getenv("ABUSE_IP_DB_API_KEY")}'
     }
 
     response = requests.request(method='GET', url=url, headers=headers, params=querystring)
 
-    # Formatted output
     decodedResponse = json.loads(response.text)["data"]["abuseConfidenceScore"]
-    print(decodedResponse)
     return decodedResponse
-    # print (json.dumps(decodedResponse, sort_keys=True, indent=4))
-
-# abuseIPDB("65.49.20.67")
-# abuseIPDB("95.156.121.11")
-# abuseIPDB("2.179.195.10")

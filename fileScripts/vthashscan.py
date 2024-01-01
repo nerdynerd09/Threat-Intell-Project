@@ -1,9 +1,11 @@
 import requests
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def VT_Request(hash):
         resultDict = {}    
-        key = '3dc154ab7a3998f30c0109a316def01db2576e6f8d37daa11ee768be5257b134'
-
+        key = os.getenv("VIRUSTOTAL_API")
         params = {'apikey': key, 'resource': hash}
         url = requests.get('https://www.virustotal.com/vtapi/v2/file/report', params=params)
         json_response = url.json()
@@ -21,27 +23,3 @@ def VT_Request(hash):
         
         return resultDict
 
-# def main():
-#         # hashInput='c0202cf6aeab8437c638533d14563d35' #malicious hash
-#         # hasInput='2d75cc1bf8e57872781f9cd04a529256'  #malicious hash
-        
-#         hashInput= input("Enter the hash of the file:")
-#         # print(hashInput)
-#         if len(hashInput) == 32:
-#             hashInput = hashInput
-#         elif len(hashInput) == 40:
-#             hashInput = hashInput
-#         elif len(hashInput) == 64:
-#             hashInput = hashInput
-#         else:
-#             print ("The Hash input does not appear valid.")
-#             exit()
-#         VT_Request(key, hashInput)                                                                                                                                                                           
-                                                                                                                                                                                                                                           
-
-# running the program
-# if __name__ == '__main__':
-#         main()
-
-# print(VT_Request("2d75cc1bf8e57872781f9cd04a52emf56"))
-# print(VT_Request("c79e337c245c32334e931392a2b4494aac6086e121f2c3c8cedc6c9993e1da4e"))
